@@ -116,6 +116,9 @@ public class InventoryController {
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable int id) {
+        Optional<Inventory> existingInventory = service.findById(id);
+        Inventory inventory = existingInventory.get();
+        inventory.getWarehouse().setNum_items(inventory.getWarehouse().getNum_items() - inventory.getQuantity_available());
         service.deleteById(id);
     }
 

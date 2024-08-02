@@ -10,6 +10,7 @@
 .nav .site-title {
     color: rgb(0, 0, 0);
     text-decoration: none;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 24px;
     line-height: 60px;
     float: left;
@@ -43,4 +44,9 @@
 
 .nav .site-title:hover {
     color: #000000;
+}
+
+.nav img{
+    width: 100px;
+    float: left;
 }
