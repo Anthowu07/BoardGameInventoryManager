@@ -22,7 +22,7 @@ public class Inventory {
     private BoardGame boardgame;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "warehouse_id")
+    @JoinColumn(name = "warehouse_id", referencedColumnName = "warehouse_id")
     private Warehouse warehouse;
 
     @Column

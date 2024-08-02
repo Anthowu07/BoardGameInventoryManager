@@ -1,9 +1,11 @@
 package com.skillstorm.project1.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skillstorm.project1.models.Inventory;
 import com.skillstorm.project1.models.Warehouse;
 import com.skillstorm.project1.services.WarehouseService;
 
@@ -76,6 +79,12 @@ public class WarehouseController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable int id) {
         service.deleteById(id);
+    }
+
+    @GetMapping(value = "/{id}/inventories", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Inventory>> getInventoriesByWarehouseId(@PathVariable int id) {
+        List<Inventory> inventories = service.getInventoriesByWarehouseId(id);
+        return ResponseEntity.ok(inventories);
     }
     
 }

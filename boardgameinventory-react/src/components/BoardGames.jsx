@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { getBoardGames, createBoardGame } from '../services/boardgameApi';
+import { getBoardGames, createBoardGame, deleteBoardGame, updateBoardGame } from '../services/boardgameApi';
+import './BoardGames.css';
 
 const BoardGameList = () => {
-
     const [boardgames, setBoardGames] = useState([]);
     const [name, setName] = useState('');
     const [publisher, setPublisher] = useState('');
-    const [reorder_quantity, setReorder_Quantity] = useState(0);
+    const [reorder_quantity, setReorder_Quantity] = useState('');
     const [error, setError] = useState(null);
+    const [editing, setEditing] = useState(false);
+    const [currentBoardGame, setCurrentBoardGame] = useState({});
 
-    //Handle GET Request
+    // Handle GET Request
     useEffect(() => {
         const fetchBoardGames = async () => {
             try {
@@ -23,7 +25,7 @@ const BoardGameList = () => {
         fetchBoardGames();
     }, []);
 
-    //Handle POST Request
+    // Handle POST Request
     const handleCreateBoardGame = async () => {
         const newBoardGame = { name, publisher, reorder_quantity };
         try {
@@ -35,16 +37,70 @@ const BoardGameList = () => {
         }
     };
 
+    // Handle DELETE Request
+    const handleDeleteBoardGame = async (boardgame_id) => {
+        console.log('Deleting board game with id:', boardgame_id); // Log the id
+        try {
+            await deleteBoardGame(boardgame_id);
+            const data = await getBoardGames();
+            setBoardGames(data);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    // Handle EDIT Request
+    const handleEditBoardGame = async (boardgame) => {
+        setEditing(true);
+        setCurrentBoardGame(boardgame);
+        setName(boardgame.name);
+        setPublisher(boardgame.publisher);
+        setReorder_Quantity(boardgame.reorder_quantity);
+    };
+
+    const handleUpdateBoardGame = async () => {
+        const updatedBoardGame = { ...currentBoardGame, name, publisher, reorder_quantity };
+        try {
+            await updateBoardGame(updatedBoardGame);
+            const data = await getBoardGames();
+            setBoardGames(data);
+            setEditing(false);
+            setCurrentBoardGame({});
+            setName('');
+            setPublisher('');
+            setReorder_Quantity(0);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
     return (
         <div>
-            <h1>Board Games!</h1>
             {error && <p>{error}</p>}
-            <ul>
-                {boardgames.map(boardgame => (
-                    <li key={boardgames.id}>{boardgame.name} - {boardgame.publisher} - {boardgame.reorder_quantity}</li>
-                ))}
-            </ul>
-            <h2>Add Board Game</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Publisher</th>
+                        <th>Reorder Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {boardgames.map(boardgame => (
+                        <tr key={boardgame.boardgame_id}>
+                            <td>{boardgame.name}</td>
+                            <td>{boardgame.publisher}</td>
+                            <td>{boardgame.reorder_quantity}</td>
+                            <td>
+                                <button onClick={() => handleDeleteBoardGame(boardgame.boardgame_id)}>Delete</button>
+                                <button onClick={() => handleEditBoardGame(boardgame)}>Edit</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <h2>{editing ? 'Edit Board Game' : 'Add Board Game'}</h2>
             <input
                 type="text"
                 placeholder="Name"
@@ -63,12 +119,11 @@ const BoardGameList = () => {
                 value={reorder_quantity}
                 onChange={(e) => setReorder_Quantity(e.target.value)}
             />
-            <button onClick={handleCreateBoardGame}>Create</button>
+            <button onClick={editing ? handleUpdateBoardGame : handleCreateBoardGame}>
+                {editing ? 'Update' : 'Add'}
+            </button>
         </div>
     );
-
 };
-
-
 
 export default BoardGameList;

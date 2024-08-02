@@ -5,6 +5,7 @@ export default function Navbar(){
         <ul>
             <li><a href="/boardgames">Board Games</a></li>
             <li><a href="/warehouses">Warehouses</a></li>
+            <li><a href="/inventory">Inventory</a></li>
         </ul>
     </nav>
     )
