@@ -1,9 +1,24 @@
 import React from 'react';
 import './Card.css'
 import { Link } from 'react-router-dom';
+import { deleteWarehouse } from '../services/warehouseApi';
 
+const Card = ({ warehouse, onDelete }) => {
+  const handleDelete = async () => {
+    // Show confirmation dialog with a message about cascading deletes
+    const userConfirmed = window.confirm(
+      'Are you sure you want to delete this warehouse? All associated inventory will also be deleted.'
+    );
+    if (userConfirmed) {
+      try {
+        await deleteWarehouse(warehouse.warehouse_id); // Call the API to delete
+        onDelete(warehouse.warehouse_id); // Notify parent component to remove the card
+      } catch (error) {
+        console.error('Error deleting warehouse:', error);
+      }
+    }
 
-const Card = ({ warehouse }) => {
+  };
   return (
 
     <div className="card">
@@ -12,6 +27,7 @@ const Card = ({ warehouse }) => {
         <p>Number of Items: {warehouse.num_items}</p>
         <p>Capacity: {warehouse.capacity}</p>
         <Link to={`/warehouses/${warehouse.warehouse_id}/inventories`}>View Inventory</Link>
+        <button className="delete-button" onClick={handleDelete}>Delete</button>
       </div>
     </div>
   );

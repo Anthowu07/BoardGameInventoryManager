@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import './BoardGames.css'
 
 const JoinTable = () => {
   const { id } = useParams();
@@ -29,8 +30,8 @@ const JoinTable = () => {
   }, [id]);
 
   return (
-    <div>
-      <h2>Board Games in Warehouse {id}</h2>
+    <div className="container">
+      <h2>Board Games in Warehouse</h2>
       {error && <div>Error: {error}</div>}
       <table>
         <thead>

@@ -30,7 +30,7 @@ public class BoardGameController {
     }
 
     @GetMapping
-    public Iterable<BoardGame> findAllMovies(){
+    public Iterable<BoardGame> findAllBoardGames(){
         return service.findAll();
     }
 

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { getInventory, createInventory } from '../services/inventoryApi';
+import { getInventory, deleteInventory, updateInventory } from '../services/inventoryApi';
 import './Inventory.css'
-const InventoryList = () => {
 
+const InventoryList = () => {
     const [inventory, setInventory] = useState([]);
     const [name, setName] = useState('');
-    const [boardgame_name, setBoardGame_Name] = useState(''); //prolly gonna have to change this to id
-    const [warehouse_name, setWarehouse_Name] = useState(''); //this too
-    const [quantity_available, setQuantity_Available] = useState(0);
-
+    const [warehouseName, setWarehouseName] = useState('');
+    const [quantity_available, setQuantity_Available] = useState('');
+    const [editing, setEditing] = useState(false);
+    const [publisher, setPublisher] = useState('');
+    const [currentInventory, setCurrentInventory] = useState({});
+    const [showForm, setShowForm] = useState(false);
     const [error, setError] = useState(null);
 
-    //Handle GET Request
+    // Handle GET Request
     useEffect(() => {
         const fetchInventory = async () => {
             try {
@@ -25,22 +27,80 @@ const InventoryList = () => {
         fetchInventory();
     }, []);
 
-    //Handle POST Request
-    const handleInventory = async () => {
-        const Inventory = { name, publisher, reorder_quantity };
+    // Handle DELETE Request
+    const handleDeleteInventory = async (inventory_id) => {
+        const userConfirmed = window.confirm('Are you sure you want to delete this inventory?');
+        if (userConfirmed) {
+            try {
+                await deleteInventory(inventory_id);
+                const data = await getInventory();
+                setInventory(data);
+            } catch (error) {
+                setError(error.message);
+            }
+        }
+    };
+
+    // Handle EDIT Request
+    const handleEditInventory = (inventory) => {
+        setEditing(true);
+        setCurrentInventory(inventory);
+        setName(inventory.boardgame.name);
+        setWarehouseName(inventory.warehouse.name);
+        setPublisher(inventory.boardgame.publisher);
+        setQuantity_Available(inventory.quantity_available);
+        setShowForm(true); // Show form when editing
+    };
+
+    const handleUpdateInventory = async () => {
+        const updatedInventory = { ...currentInventory, name, publisher, quantity_available };
         try {
-            await Inventory(newInventory);
+            await updateInventory(updatedInventory);
             const data = await getInventory();
             setInventory(data);
+            setEditing(false);
+            setCurrentInventory({});
+            setName('');
+            setWarehouseName('');
+            setPublisher('');
+            setQuantity_Available(0);
+            setShowForm(false); // Hide form after updating
         } catch (error) {
             setError(error.message);
         }
     };
 
+    const toggleForm = () => {
+        setEditing(false);
+        setShowForm(!showForm);
+        setName('');
+        setWarehouseName('');
+        setPublisher('');
+        setQuantity_Available('');
+    };
+
     return (
-        <div>
+        <div className="container">
             <h2>Inventory Data</h2>
             {error && <div>Error: {error}</div>}
+            {showForm && (
+                <div className="form-container">
+                    <h2>Edit Inventory</h2>
+                    <span>Editing quantity of {name} in the {warehouseName} Warehouse</span>
+                    <input
+                        type="number"
+                        placeholder="Quantity Available"
+                        value={quantity_available}
+                        onChange={(e) => setQuantity_Available(e.target.value)}
+                    />
+                    <button onClick={handleUpdateInventory}>
+                        {'Update'}
+                    </button>
+                    <button onClick={toggleForm}>
+                        {'Cancel'}
+                    </button>
+                </div>
+            )}
             <table>
                 <thead>
                     <tr>
@@ -48,10 +108,8 @@ const InventoryList = () => {
                         <th>Board Game Name</th>
                         <th>Publisher</th>
                         <th>Quantity Available</th>
-                        <th>Reorder Point</th>
-                        <th>Maximum Stock Level</th>
-                        <th>Minimum Stock Level</th>
                         <th>Warehouse Name</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,19 +119,17 @@ const InventoryList = () => {
                             <td>{inventory.boardgame.name}</td>
                             <td>{inventory.boardgame.publisher}</td>
                             <td>{inventory.quantity_available}</td>
-                            <td>{inventory.reorder_point}</td>
-                            <td>{inventory.maximum_stock_level}</td>
-                            <td>{inventory.minimum_stock_level}</td>
                             <td>{inventory.warehouse.name}</td>
+                            <td>
+                                <button onClick={() => handleDeleteInventory(inventory.inventory_id)}>Delete</button>
+                                <button onClick={() => handleEditInventory(inventory)}>Edit Quantity</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
         </div>
     );
-
 };
-
-
 
 export default InventoryList;

@@ -39,6 +39,15 @@ public class Inventory {
 
     public Inventory() {
     }
+
+    public Inventory(int inventory_id, BoardGame boardgame, Warehouse warehouse, int quantity_available,
+            int reorder_point) {
+        this.inventory_id = inventory_id;
+        this.boardgame = boardgame;
+        this.warehouse = warehouse;
+        this.quantity_available = quantity_available;
+        this.reorder_point = reorder_point;
+    }
     
     public Inventory(int inventory_id, BoardGame boardgame, Warehouse warehouse, int quantity_available,
             int reorder_point, int maximum_stock_level, int minimum_stock_level) {

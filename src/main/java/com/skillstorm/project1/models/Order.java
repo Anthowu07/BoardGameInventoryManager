@@ -7,29 +7,30 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 //TODO: Finish setting all columns, getters and setters, tostring
 @Entity
-@Table(name = "order")
+@Table(name = "\"order\"")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int order_id;
 
-    @OneToMany
-    @JoinColumn(name = "order_id")
-    private Set<BoardGame> boardgames;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "boardgame_id")
+    private BoardGame boardgame;
 
-    @OneToMany
-    @JoinColumn(name = "order_id")
-    private Set<Warehouse> warehouses;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "warehouse_id", referencedColumnName = "warehouse_id")
+    private Warehouse warehouse;
 
     @Column
     private int quantity;
@@ -37,4 +38,56 @@ public class Order {
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate date;
 
+
+    public Order(int order_id, BoardGame boardgame, Warehouse warehouse, int quantity, LocalDate date) {
+        this.order_id = order_id;
+        this.boardgame = boardgame;
+        this.warehouse = warehouse;
+        this.quantity = quantity;
+        this.date = date;
+    }
+
+    public Order() {
+    }
+
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public BoardGame getBoardgame() {
+        return boardgame;
+    }
+
+    public void setBoardgame(BoardGame boardgame) {
+        this.boardgame = boardgame;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
+    }
+    
 }

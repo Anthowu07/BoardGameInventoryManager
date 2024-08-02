@@ -32,7 +32,7 @@ public class WarehouseController {
     }
 
     @GetMapping
-    public Iterable<Warehouse> findAllMovies(){
+    public Iterable<Warehouse> findAllWarehouses(){
         return service.findAll();
     }
 
@@ -81,6 +81,7 @@ public class WarehouseController {
         service.deleteById(id);
     }
 
+    //GET request to fetch join table (all inventories related to one warehouse ID)
     @GetMapping(value = "/{id}/inventories", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Inventory>> getInventoriesByWarehouseId(@PathVariable int id) {
         List<Inventory> inventories = service.getInventoriesByWarehouseId(id);

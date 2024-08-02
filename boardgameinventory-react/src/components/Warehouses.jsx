@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { getWarehouses, createWarehouse } from '../services/warehouseApi';
+import { getWarehouses, createWarehouse, deleteWarehouse } from '../services/warehouseApi';
 import Card from './Card';
-const WarehouseList = () => {
+import './Warehouse.css';
 
+const WarehouseList = () => {
     const [warehouses, setWarehouse] = useState([]);
     const [name, setName] = useState('');
-    const [capacity, setCapacity] = useState(0);
-    const [num_items, setNum_Items] = useState(0);
+    const [capacity, setCapacity] = useState('');
+    const [num_items, setNum_Items] = useState('');
     const [error, setError] = useState(null);
+    const [showForm, setShowForm] = useState(false); // State to control form visibility
 
-    //Handle GET Request
+    // Handle GET Request
     useEffect(() => {
         const fetchWarehouses = async () => {
             try {
@@ -23,29 +25,67 @@ const WarehouseList = () => {
         fetchWarehouses();
     }, []);
 
-    //Handle POST Request
+    // Handle POST Request
     const handleCreateWarehouse = async () => {
-        const newWarehouse = { name, capacity, num_items };
+        const newWarehouse = { name, capacity, num_items: 0 };
         try {
             await createWarehouse(newWarehouse);
             const data = await getWarehouses();
             setWarehouse(data);
+            setShowForm(false); // Hide form after creation
+            setName('');
+            setCapacity(0);
+            setNum_Items(0);
         } catch (error) {
             setError(error.message);
         }
     };
 
-    return (
+    // Handle DELETE Request
+    const handleDeleteWarehouse = (id) => {
+        console.log("deleting: " + id)
+        setWarehouse(warehouses.filter(warehouse => warehouse.warehouse_id !== id));
+    };
 
-        <div className="cards">
+    const toggleForm = () => {
+        setShowForm(!showForm);
+    };
+
+    return (
+        <div className="warehouse-container">
+            <button onClick={toggleForm} className="add-warehouse-button">
+                {showForm ? 'Cancel' : 'Add Warehouse'}
+            </button>
+            {showForm && (
+                <div className="form-container">
+                    <h2>Add Warehouse</h2>
+                    <input
+                        type="text"
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <input
+                        type="number"
+                        placeholder="Capacity"
+                        value={capacity}
+                        onChange={(e) => setCapacity(e.target.value)}
+                    />
+                    <button onClick={handleCreateWarehouse}>Create Warehouse</button>
+                </div>
+            )}
             {error && <div>Error: {error}</div>}
-            {warehouses.map((warehouse) => (
-                <Card key={warehouse.warehouse_id} warehouse={warehouse} />
-            ))}
+            <div className="cards">
+                {warehouses.map((warehouse) => (
+                    <Card
+                    key={warehouse.warehouse_id}
+                    warehouse={warehouse}
+                    onDelete={handleDeleteWarehouse}
+                />
+                ))}
+            </div>
         </div>
     );
 };
-
-
 
 export default WarehouseList;

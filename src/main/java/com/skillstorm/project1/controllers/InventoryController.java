@@ -40,7 +40,7 @@ public class InventoryController {
     }
 
     @GetMapping
-    public Iterable<Inventory> findAllMovies(){
+    public Iterable<Inventory> findAllInventories(){
         return service.findAll();
     }
 
@@ -71,6 +71,7 @@ public class InventoryController {
         
         BoardGame boardgame = boardGameOptional.get();
         Warehouse warehouse = warehouseOptional.get();
+        //Update warehouse quantity field
         warehouse.setNum_items(warehouse.getNum_items() + boardgame.getReorder_quantity());
         Inventory inventory = new Inventory();
 
@@ -84,9 +85,6 @@ public class InventoryController {
         //Create inventory table entry
         inventory = service.save(inventory);
 
-        //Update warehouse quantity field
-        boardgame = boardGameService.save(boardgame);
-
         return new ResponseEntity<>(inventory, HttpStatus.CREATED);
     }
 
@@ -98,6 +96,16 @@ public class InventoryController {
         Optional<Inventory> existingInventory = this.service.findById(inventory.getInventory_id());
         Inventory updatedInventory = inventory;
         if(existingInventory.isPresent()){
+            Inventory oldInventory = existingInventory.get();
+            inventory.setBoardgame(oldInventory.getBoardgame());
+            inventory.setWarehouse(oldInventory.getWarehouse());
+            //When adding more inventory, update the num_items property of that warehouse
+            inventory.getWarehouse().setNum_items(inventory.getWarehouse().getNum_items() + (updatedInventory.getQuantity_available() - oldInventory.getQuantity_available()));
+            
+            //Hard coded values for now
+            inventory.setReorder_point(5);
+            inventory.setMaximum_stock_level(100);
+            inventory.setMinimum_stock_level(0);
             updatedInventory = this.service.save(inventory);
             return new ResponseEntity<>(updatedInventory, HttpStatus.OK);
         }
