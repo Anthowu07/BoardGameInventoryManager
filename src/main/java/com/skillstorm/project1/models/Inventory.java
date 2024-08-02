@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+//Used as a middleman between a product and it's warehouse location
 @Entity
 @Table(name = "inventory")
 public class Inventory {
@@ -17,10 +18,12 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int inventory_id;
 
+    //ManyToOne relationship with boardgames because each inventory entry is associated with only one boardgame
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "boardgame_id")
     private BoardGame boardgame;
 
+    //ManyToOne relationship with warehouse because each inventory entry is associated with only one warehouse
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "warehouse_id", referencedColumnName = "warehouse_id")
     private Warehouse warehouse;

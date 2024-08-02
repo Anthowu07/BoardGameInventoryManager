@@ -1,5 +1,6 @@
 package com.skillstorm.project1.dtos;
 
+//Used to grab only board game and warehouse ids
 public class OrderRequest {
 
     private int boardgame_id;

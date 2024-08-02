@@ -1,19 +1,22 @@
-PROJECT 1 CHECKLIST
---------------------------------
+# PROJECT 1 - Board Game Inventory Manager
+Made by Anthony Wu
 
-BACKEND:
-    - Create Services, Controllers, Models, and Repos
-    - Populate Database
-    - Look Into Logging
-    - Enable Crud Operations on every table AKA Postman(maybe not all?)
+## Overview
+This is a rudimentary board game inventory manager used to simulate the tracking of board game products across several warehouses. The user can view, edit, update and delete any data in the program.
 
-FRONTEND:
-    - Set Up React
-    - Figure out how to connect Backend to Frontend
+## Software
+### Backend
+- Spring Boot
+- Maven
+- PostgreSQL
 
+### Frontend
+- React
+- HTML/CSS
+- FetchAPI
+- Vite
 
-GOALS:
-    - Allow user to create fake restock / customer orders
-    - Allow user to move stock from one warehouse to another
-    - Pretty UI
-    - Allow User to search for inventory with filters (board game name, warehouse)
+## Functionality
+- CRUD operations on every entity in the program
+- Handling of over capacity edge case
+- Simple and minimalistic UI for easy navigation

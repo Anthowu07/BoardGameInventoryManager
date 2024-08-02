@@ -15,7 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-//TODO: Finish setting all columns, getters and setters, tostring
+//Used for the creation of inventory entries
 @Entity
 @Table(name = "\"order\"")
 public class Order {
@@ -24,10 +24,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int order_id;
 
+    //ManyToOne relationship with boardgames because each order entry is associated with only one boardgame
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "boardgame_id")
     private BoardGame boardgame;
 
+    //ManyToOne relationship with warehouse because each order entry is associated with only one warehouse
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "warehouse_id", referencedColumnName = "warehouse_id")
     private Warehouse warehouse;
