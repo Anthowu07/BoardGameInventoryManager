@@ -31,29 +31,29 @@ pipeline {
             }
         }
 
-        // stage('Build Backend'){
-        //     steps{
-        //         sh "cd backend && mvn clean install"
-        //     }
-        // }
+        stage('Build Backend'){
+            steps{
+                sh "cd backend && mvn clean install && ls target/"
+            }
+        }
 
-        // stage('Test Backend'){
-        //     steps{
-        //         sh "cd backend && mvn test"
-        //     }
-        // }
+        stage('Test Backend'){
+            steps{
+                sh "cd backend && mvn test"
+            }
+        }
 
-        // stage('Deploy Backend'){
-        //     steps{
-        //         script{
-        //           withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
-        //                 sh 'pwd'
-        //                 sh "aws s3 cp demo/target/demo-1.0-SNAPSHOT.jar s3://bjgomes-bucket-sdet-backend"
-        //                 sh "echo 'aws elasticbeanstalk create-application-version --application-name myName --version-label 0.0.1 --source-bundle S3Bucket=\"bjgomes-bucket-sdet-backend\",S3Key=\"demo-1.0-SNAPSHOT.jar\"'"
-        //                 sh "ech 'aws elasticbeanstalk update-environment --environment-name myName --version-label 0.0.1'"
-        //             }  
-        //         }   
-        //     }
-        // }
+        stage('Deploy Backend'){
+            steps{
+                script{
+                  withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
+                        sh 'pwd'
+                        sh "aws s3 cp backend/target/project1-1.0.0-SNAPSHOT.jar s3://boardgame-inventory-management-backend"
+                        sh "echo 'aws elasticbeanstalk create-application-version --application-name boardgameManagement --version-label 0.0.1 --source-bundle S3Bucket=\"boardgame-inventory-management-backend\",S3Key=\"project1-1.0.0-SNAPSHOT.jar\"'"
+                        sh "echo 'aws elasticbeanstalk update-environment --environment-name Boardgame-inventory-env-4 --version-label 0.0.1'"
+                    }  
+                }   
+            }
+        }
     }
 }
