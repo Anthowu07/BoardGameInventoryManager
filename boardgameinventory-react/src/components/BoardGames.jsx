@@ -15,12 +15,14 @@ const BoardGameList = () => {
     // Handle GET Request
     useEffect(() => {
         const fetchBoardGames = async () => {
-            try {
-                const data = await getBoardGames();
-                setBoardGames(data);
-            } catch (error) {
-                setError(error.message);
-            }
+            // try {
+            //     const data = await getBoardGames();
+            //     setBoardGames(data);
+            // } catch (error) {
+            //     setError(error.message);
+            // }
+            const data = await getBoardGames();
+            setBoardGames(data);
         };
 
         fetchBoardGames();

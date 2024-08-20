@@ -1,4 +1,4 @@
-const WAREHOUSE_API_URL = 'http://localhost:8080/warehouses';
+const WAREHOUSE_API_URL = 'http://localhost:8080/api/warehouses';
 // GET request
 export const getWarehouses = async ()=>{
     const response = await fetch(WAREHOUSE_API_URL);

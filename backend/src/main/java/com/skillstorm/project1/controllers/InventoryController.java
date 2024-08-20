@@ -24,7 +24,7 @@ import com.skillstorm.project1.services.InventoryService;
 import com.skillstorm.project1.services.WarehouseService;
 
 @RestController
-@RequestMapping("/inventory")
+@RequestMapping("/api/inventory")
 public class InventoryController {
     @Autowired
     private InventoryService service;

@@ -1,4 +1,4 @@
-const BOARDGAME_API_URL = 'http://localhost:8080/boardgames';
+const BOARDGAME_API_URL = 'http://localhost:8080/api/boardgames';
 
 export const getBoardGames = async () => {
     const response = await fetch(BOARDGAME_API_URL);

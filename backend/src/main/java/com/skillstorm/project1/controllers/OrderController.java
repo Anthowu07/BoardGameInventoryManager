@@ -27,7 +27,7 @@ import com.skillstorm.project1.services.OrderService;
 import com.skillstorm.project1.services.WarehouseService;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/api/orders")
 public class OrderController {
     @Autowired
     private OrderService service;

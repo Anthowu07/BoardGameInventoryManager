@@ -22,7 +22,7 @@ import com.skillstorm.project1.models.Warehouse;
 import com.skillstorm.project1.services.WarehouseService;
 
 @RestController
-@RequestMapping("/warehouses")
+@RequestMapping("/api/warehouses")
 public class WarehouseController {
     @Autowired
     private WarehouseService service;

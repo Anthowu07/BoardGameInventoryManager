@@ -1,4 +1,4 @@
-const INVENTORY_API_URL = 'http://localhost:8080/inventory';
+const INVENTORY_API_URL = 'http://localhost:8080/api/inventory';
 
 export const getInventory = async ()=>{
     const response = await fetch(INVENTORY_API_URL);

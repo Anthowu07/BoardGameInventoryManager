@@ -19,7 +19,7 @@ import com.skillstorm.project1.models.BoardGame;
 import com.skillstorm.project1.services.BoardGameService;
 
 @RestController
-@RequestMapping("/boardgames")
+@RequestMapping("/api/boardgames")
 public class BoardGameController {
 
     @Autowired
