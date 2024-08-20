@@ -11,32 +11,37 @@ pipeline {
 
         stage('Deploy Frontend'){
             steps{
+                // script{
+                //     try{
+                //         withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
+                //             sh "aws s3 sync boardgameinventory-react/dist s3://boardgame-inventory-management"
+                //             //sh "aws elasticbeanstalk create-application-version --application-name myName --version-label your-version-label 0.0.1 --source-bundle S3Bucket="boardgame-inventory-management",S3Key="*.jar""
+                //             //sh "aws elasticbeanstalk update-environment --environment-name myName --version-label your-version-label"
+                //         }
+                //     }catch(Exception e){
+                //         echo "${e}"
+                //         throw e
+                //     }
+                // }
                 script{
-                    try{
-                        withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
-                            sh "aws s3 sync boardgameinventory-react/dist s3://boardgame-inventory-management"
-                            //sh "aws elasticbeanstalk create-application-version --application-name myName --version-label your-version-label 0.0.1 --source-bundle S3Bucket="boardgame-inventory-management",S3Key="*.jar""
-                            //sh "aws elasticbeanstalk update-environment --environment-name myName --version-label your-version-label"
-                        }
-                    }catch(Exception e){
-                        echo "${e}"
-                        throw e
-                    }
+                      withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
+                        sh "aws s3 sync boardgameinventory-react/dist s3://boardgame-inventory-management"
+                        }  
                 }
             }
         }
 
-        stage('Build Backend'){
-            steps{
-                sh "cd backend && mvn clean install"
-            }
-        }
+        // stage('Build Backend'){
+        //     steps{
+        //         sh "cd backend && mvn clean install"
+        //     }
+        // }
 
-        stage('Test Backend'){
-            steps{
-                sh "cd backend && mvn test"
-            }
-        }
+        // stage('Test Backend'){
+        //     steps{
+        //         sh "cd backend && mvn test"
+        //     }
+        // }
 
         // stage('Deploy Backend'){
         //     steps{
