@@ -6,7 +6,7 @@ pipeline {
             steps{
                 sh "echo Building Frontend"
                 sh "cd boardgameinventory-react && npm install && npm run build"
-                sh "cd .. && echo *"
+                sh "echo *"
             }
         }
 
