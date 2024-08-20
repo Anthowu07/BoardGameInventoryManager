@@ -49,7 +49,7 @@ pipeline {
                   withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
                         sh 'pwd'
                         sh "aws s3 cp backend/target/project1-0.0.1-SNAPSHOT.jar s3://boardgame-inventory-management-backend"
-                        sh "aws elasticbeanstalk create-application-version --application-name boardgameManagement --version-label 0.0.1 --source-bundle S3Bucket=\"boardgame-inventory-management-backend\",S3Key=\"project1-0.0.1-SNAPSHOT.jar\""
+                        sh "aws elasticbeanstalk create-application-version --application-name boardgame-inventory --version-label 0.0.1 --source-bundle S3Bucket=\"boardgame-inventory-management-backend\",S3Key=\"project1-0.0.1-SNAPSHOT.jar\""
                         sh "aws elasticbeanstalk update-environment --environment-name Boardgame-inventory-env-4 --version-label 0.0.1"
                     }  
                 }   
