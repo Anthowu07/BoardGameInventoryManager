@@ -25,7 +25,7 @@ pipeline {
                 // }
                 script{
                       withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
-                        sh "aws s3 sync boardgameinventory-react/dist s3://boardgame-inventory-management"
+                        sh "cd boardgameinventory-react && aws s3 dist s3://boardgame-inventory-management"
                         }  
                 }
             }
