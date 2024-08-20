@@ -26,7 +26,7 @@ pipeline {
                 script{
                       withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
                         sh "echo *"
-                        sh "cd backend/src/main/resources/static && echo * && aws s3 sync dist s3://boardgame-inventory-management"
+                        sh "cd backend/src/main/resources && echo * && aws s3 sync static s3://boardgame-inventory-management"
                         }  
                 }
             }
