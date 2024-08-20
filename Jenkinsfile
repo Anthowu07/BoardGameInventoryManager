@@ -6,7 +6,7 @@ pipeline {
             steps{
                 sh "echo Building Frontend"
                 sh "cd boardgameinventory-react && npm install && npm run build"
-                sh "echo boardgameinventory-react/dist"
+                sh "cd .. && echo *"
             }
         }
 
@@ -26,6 +26,7 @@ pipeline {
                 // }
                 script{
                       withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
+                        sh "echo *"
                         sh "cd boardgameinventory-react && aws s3 sync dist s3://boardgame-inventory-management"
                         }  
                 }
