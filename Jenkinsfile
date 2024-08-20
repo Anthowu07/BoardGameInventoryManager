@@ -14,7 +14,7 @@ pipeline {
                 script{
                     try{
                         withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
-                            sh "aws s3 sync boardgameinventory-react/dist s3://boardgame-inventory-management"
+                            sh "aws s3 sync ./boardgameinventory-react/dist s3://boardgame-inventory-management"
                             //sh "aws elasticbeanstalk create-application-version --application-name myName --version-label your-version-label 0.0.1 --source-bundle S3Bucket="boardgame-inventory-management",S3Key="*.jar""
                             //sh "aws elasticbeanstalk update-environment --environment-name myName --version-label your-version-label"
                         }
