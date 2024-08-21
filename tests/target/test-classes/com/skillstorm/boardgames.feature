@@ -10,3 +10,7 @@ Feature: Display the board game table in the board game page
     Then I should see a table with board games
 
 
+  Scenario: Check if a specific board game is present in the table
+    Given I am on the board game page
+    When the table is fully loaded
+    Then I should see a board game with name "catan" in the table
