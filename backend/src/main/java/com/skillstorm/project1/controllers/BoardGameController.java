@@ -62,7 +62,7 @@ public class BoardGameController {
     //The method checks if the value exists in the table before attempting the method
     @PutMapping("/{id}")
     public ResponseEntity<BoardGame> updateBoardGame(@PathVariable("id") int id, @RequestBody BoardGame boardgame){
-        boardgame.setBoardgame_id(id); 
+        boardgame.setBoardgame_id(id);
         Optional<BoardGame> existingBoardGame = this.service.findById(boardgame.getBoardgame_id());
         BoardGame updatedBoardGame = boardgame;
         if(existingBoardGame.isPresent()){
