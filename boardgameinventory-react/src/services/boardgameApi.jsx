@@ -1,4 +1,5 @@
-const BOARDGAME_API_URL = 'http://boardgame-inventory-env-4.eba-9ddwy6jr.us-east-1.elasticbeanstalk.com:8080/api/boardgames';
+//const BOARDGAME_API_URL = 'http://boardgame-inventory-env-4.eba-9ddwy6jr.us-east-1.elasticbeanstalk.com:8080/api/boardgames';
+const BOARDGAME_API_URL = 'http://localhost:8080/api/boardgames';
 
 export const getBoardGames = async () => {
     const response = await fetch(BOARDGAME_API_URL);
