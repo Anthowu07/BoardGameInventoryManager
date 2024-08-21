@@ -1,3 +1,5 @@
+//TODO: Upload this to S3 bucket using Jenkins
+
 import React, { useEffect, useState } from 'react';
 import { getBoardGames, createBoardGame, deleteBoardGame, updateBoardGame } from '../services/boardgameApi';
 import './BoardGames.css';
@@ -46,7 +48,7 @@ const BoardGameList = () => {
         console.log('Deleting board game with id:', boardgame_id); // Log the id
         // Show confirmation dialog with a message about cascading deletes
         const userConfirmed = window.confirm(
-            'Are you sure you want to delete this warehouse? All associated inventory will also be deleted.'
+            'Are you sure you want to delete this board game? All associated inventory will also be deleted.'
         );
         if (userConfirmed) {
             try {
@@ -125,7 +127,7 @@ const BoardGameList = () => {
                         value={reorder_quantity}
                         onChange={(e) => setReorder_Quantity(e.target.value)}
                     />
-                    <button id="submit-form-id" onClick={editing ? handleUpdateBoardGame : handleCreateBoardGame}>
+                    <button id="submit-form-button" onClick={editing ? handleUpdateBoardGame : handleCreateBoardGame}>
                         {editing ? 'Update' : 'Create'}
                     </button>
                 </div>

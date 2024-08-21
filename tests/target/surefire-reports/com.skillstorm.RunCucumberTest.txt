@@ -1,14 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.skillstorm.RunCucumberTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.213 s <<< FAILURE! - in com.skillstorm.RunCucumberTest
-Display the board game table in the board game page.Check if the board game table is displayed in the board game page  Time elapsed: 0.064 s  <<< ERROR!
-java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebDriver.get(String)" because "com.skillstorm.displayBoardGamesTest.driver" is null
-	at com.skillstorm.displayBoardGamesTest.iAmOnTheBoardGamePage(displayBoardGamesTest.java:47)
-	at ✽.I am on the board game page(classpath:com/skillstorm/boardgames.feature:8)
-
-Display the board game table in the board game page.Check if a specific board game is present in the table  Time elapsed: 0.01 s  <<< ERROR!
-java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebDriver.get(String)" because "com.skillstorm.displayBoardGamesTest.driver" is null
-	at com.skillstorm.displayBoardGamesTest.iAmOnTheBoardGamePage(displayBoardGamesTest.java:47)
-	at ✽.I am on the board game page(classpath:com/skillstorm/boardgames.feature:14)
-
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.639 s - in com.skillstorm.RunCucumberTest
