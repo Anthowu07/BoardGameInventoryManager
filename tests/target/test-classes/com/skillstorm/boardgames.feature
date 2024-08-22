@@ -9,12 +9,6 @@ Feature: Display the board game table in the board game page
     When the page is fully loaded
     Then I should see a table with board games
 
-
-  # Scenario: Check if a specific board game is present in the table
-  #   Given I am on the board game page
-  #   When the table is fully loaded
-  #   Then I should see a board game with name "catan" in the table
-
   Scenario: Add a new board game
     Given I am on the board game page
     When I press the "Add Board Game" button
@@ -29,3 +23,5 @@ Feature: Display the board game table in the board game page
     When I press the "Delete" button on the game named "Catan"
     And I press "OK" on the popup
     Then The board game "Catan" should not be in the table
+
+#TODO: Add Scenario for Edit Functionality

@@ -45,20 +45,20 @@ public class BoardGamePageTests {
     }
 
     @When("the page is fully loaded")
-    public void the_page_is_fully_loaded() {
+    public void thePageIsFullyLoaded() {
         // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("board-game-table")));
     }
 
     @When("I press the {string} button")
-    public void i_press_the_button(String buttonText) {
+    public void iPressTheButton(String buttonText) {
         WebElement button = driver.findElement(By.id("toggle-form-button"));
         button.click();
     }
 
 
     @When("I press the {string} button on the game named {string}")
-    public void i_press_the_button_on_the_game_named(String buttonText, String gameName) {
+    public void iPressTheButtonOnTheGameNamed(String buttonText, String gameName) {
         // Wait until the board game name is present in the table body
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("boardgame-table-body"), gameName));
 
@@ -73,7 +73,7 @@ public class BoardGamePageTests {
     }
 
     @When("I enter {string} in the {string} field")
-    public void i_enter_in_the_field(String value, String fieldName) {
+    public void iEnterInTheField(String value, String fieldName) {
         WebElement inputField;
         switch (fieldName) {
             case "Name":
@@ -93,14 +93,14 @@ public class BoardGamePageTests {
     }
 
     @When("I press the {string} button to submit the form")
-    public void i_press_the_button_to_submit_the_form(String buttonText) {
+    public void iPressTheButtonToSubmitTheForm(String buttonText) {
 
         WebElement button = driver.findElement(By.id("submit-form-button"));
         button.click();
     }
 
     @When("I press {string} on the popup")
-    public void i_press_on_the_popup(String action) {
+    public void iPressOnThePopup(String action) {
         // Wait for the alert popup to appear after clicking delete
         wait.until(ExpectedConditions.alertIsPresent());
         if (action.equalsIgnoreCase("OK")) {
@@ -133,7 +133,7 @@ public class BoardGamePageTests {
     }
 
     @Then("The board game {string} should not be in the table")
-    public void the_board_game_should_not_be_in_the_table(String gameName) {
+    public void theBoardGameShouldNotBeInTheTable(String gameName) {
         boolean isNotVisible = wait
                 .until(ExpectedConditions.invisibilityOfElementWithText(By.id("boardgame-table-body"), gameName));
 

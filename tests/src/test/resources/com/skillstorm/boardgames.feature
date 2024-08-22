@@ -1,4 +1,4 @@
-@displayBoardGames
+@BoardGamePageTests
 Feature: Display the board game table in the board game page
   As a user
   I want to be able to view all board games available for order
@@ -9,8 +9,19 @@ Feature: Display the board game table in the board game page
     When the page is fully loaded
     Then I should see a table with board games
 
-
-  Scenario: Check if a specific board game is present in the table
+  Scenario: Add a new board game
     Given I am on the board game page
-    When the table is fully loaded
-    Then I should see a board game with name "catan" in the table
+    When I press the "Add Board Game" button
+    And I enter "Catan" in the "Name" field
+    And I enter "Mayfair Games" in the "Publisher" field
+    And I enter "10" in the "Reorder Quantity" field
+    And I press the "Create" button to submit the form
+    Then I should see a board game with name "Catan" in the table
+
+  Scenario: Delete a board game
+    Given I am on the board game page
+    When I press the "Delete" button on the game named "Catan"
+    And I press "OK" on the popup
+    Then The board game "Catan" should not be in the table
+
+#TODO: Add Scenario for Edit Functionality
