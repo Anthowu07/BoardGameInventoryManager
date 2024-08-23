@@ -1,5 +1,7 @@
 package com.skillstorm;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 
 import java.time.Duration;
@@ -13,23 +15,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 
 public class BoardGamePageTests {
 
     WebDriver driver;
     WebDriverWait wait;
 
-    @BeforeClass()
+    @Before()
     public void before() {
+        System.out.println("this is running");
         driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    @AfterClass()
+    @After()
     public void after() {
         if (driver != null) {
             driver.quit();
@@ -38,10 +37,12 @@ public class BoardGamePageTests {
 
     @Given("I am on the board game page")
     public void iAmOnTheBoardGamePage() {
-        driver = new ChromeDriver();
-        // driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/boardgames");
+        //driver = new ChromeDriver();
+        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+         // driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/boardgames");
         driver.get("http://localhost:5173/boardgames");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+       
     }
 
     @When("the page is fully loaded")
@@ -117,7 +118,7 @@ public class BoardGamePageTests {
     public void iShouldSeeATableWithBoardGames() {
         WebElement table = driver.findElement(By.id("board-game-table"));
         Assert.assertTrue(table.isDisplayed());
-        driver.quit();
+        //driver.quit();
     }
 
     @Then("I should see a board game with name {string} in the table")
@@ -128,8 +129,7 @@ public class BoardGamePageTests {
 
         // Assert that the board game name is found in the table
         Assert.assertTrue(isTextPresent, "Board game with name " + boardgameName + " was not found in the table.");
-
-        driver.quit();
+        //driver.quit();
     }
 
     @Then("The board game {string} should not be in the table")
@@ -141,6 +141,6 @@ public class BoardGamePageTests {
         Assert.assertTrue(isNotVisible,
                 "Board game with name " + gameName + " is still visible in the table, but it should not be.");
 
-        driver.quit();
+        //driver.quit();
     }
 }

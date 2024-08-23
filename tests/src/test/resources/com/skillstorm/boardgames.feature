@@ -18,10 +18,18 @@ Feature: Display the board game table in the board game page
     And I press the "Create" button to submit the form
     Then I should see a board game with name "Catan" in the table
 
+  Scenario: Edit a board game
+    Given I am on the board game page
+    When I press the "Edit" button on the game named "Catan"
+    And I enter "Wingspan" in the "Name" field
+    And I enter "Stonemaier Games" in the "Publisher" field
+    And I enter "20" in the "Reorder Quantity" field
+    And I press the "Update" button to submit the form
+    Then I should see a board game with name "Wingspan" in the table
+    And The board game "Catan" should not be in the table
+
   Scenario: Delete a board game
     Given I am on the board game page
-    When I press the "Delete" button on the game named "Catan"
+    When I press the "Delete" button on the game named "Wingspan"
     And I press "OK" on the popup
-    Then The board game "Catan" should not be in the table
-
-#TODO: Add Scenario for Edit Functionality
+    Then The board game "Wingspan" should not be in the table
