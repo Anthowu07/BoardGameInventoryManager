@@ -21,33 +21,39 @@ public class BoardGamePageTests {
     WebDriver driver;
     WebDriverWait wait;
 
-    @Before()
-    public void before() {
-        System.out.println("this is running");
-        driver = new ChromeDriver();
+    // @Before()
+    // public void before() {
+    //     driver = new ChromeDriver();
+    //     wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    // }
+
+    // @After()
+    // public void after() {
+    //     if (driver != null) {
+    //         driver.quit();
+    //     }
+    // }
+
+    @Before
+    public void setUp() {
+        driver = WebDriverSingleton.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    @After()
-    public void after() {
-        if (driver != null) {
-            driver.quit();
-        }
+    @After
+    public void tearDown() {
+        WebDriverSingleton.quitDriver();
     }
 
     @Given("I am on the board game page")
     public void iAmOnTheBoardGamePage() {
-        //driver = new ChromeDriver();
-        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-         // driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/boardgames");
+        // driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/boardgames");
         driver.get("http://localhost:5173/boardgames");
        
     }
 
-    @When("the page is fully loaded")
-    public void thePageIsFullyLoaded() {
-        // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    @When("the board game page is fully loaded")
+    public void theBoardGamePageIsFullyLoaded() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("board-game-table")));
     }
 
@@ -93,15 +99,15 @@ public class BoardGamePageTests {
         inputField.sendKeys(value);
     }
 
-    @When("I press the {string} button to submit the form")
-    public void iPressTheButtonToSubmitTheForm(String buttonText) {
+    @When("I press the {string} button to submit the board game form")
+    public void iPressTheButtonToSubmitTheBoardGameForm(String buttonText) {
 
         WebElement button = driver.findElement(By.id("submit-form-button"));
         button.click();
     }
 
-    @When("I press {string} on the popup")
-    public void iPressOnThePopup(String action) {
+    @When("I press {string} on the board game delete popup")
+    public void iPressOnTheBoardGameDeletePopup(String action) {
         // Wait for the alert popup to appear after clicking delete
         wait.until(ExpectedConditions.alertIsPresent());
         if (action.equalsIgnoreCase("OK")) {
@@ -118,7 +124,6 @@ public class BoardGamePageTests {
     public void iShouldSeeATableWithBoardGames() {
         WebElement table = driver.findElement(By.id("board-game-table"));
         Assert.assertTrue(table.isDisplayed());
-        //driver.quit();
     }
 
     @Then("I should see a board game with name {string} in the table")
@@ -129,7 +134,6 @@ public class BoardGamePageTests {
 
         // Assert that the board game name is found in the table
         Assert.assertTrue(isTextPresent, "Board game with name " + boardgameName + " was not found in the table.");
-        //driver.quit();
     }
 
     @Then("The board game {string} should not be in the table")
@@ -140,7 +144,5 @@ public class BoardGamePageTests {
         // If the element is not visible, assert that it's not in the table
         Assert.assertTrue(isNotVisible,
                 "Board game with name " + gameName + " is still visible in the table, but it should not be.");
-
-        //driver.quit();
     }
 }

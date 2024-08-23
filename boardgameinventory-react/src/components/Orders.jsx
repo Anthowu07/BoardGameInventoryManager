@@ -10,6 +10,7 @@ const Orders = () => {
     const [selectedBoardGame, setSelectedBoardGame] = useState('');
     const [selectedWarehouse, setSelectedWarehouse] = useState('');
     const [error, setError] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(''); // New state for success message
 
     // Fetch board games for dropdown
     useEffect(() => {
@@ -57,8 +58,10 @@ const Orders = () => {
             setSelectedBoardGame('');
             setSelectedWarehouse('');
             setError(null);
+            setSuccessMessage('Order Placed!'); // Set success message
         } catch (error) {
             setError(error.message);
+            setSuccessMessage(''); // Clear success message on error
         }
     };
 
@@ -66,7 +69,8 @@ const Orders = () => {
         <div>
             <h2>Create Order</h2>
             {error && <p className="error">{error}</p>}
-            <form onSubmit={handleSubmit}>
+            {successMessage && <p className="success">{successMessage}</p>} {/* Display success message */}
+            <form id="orders-form" onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="boardgame">Board Game:</label>
                     <select
@@ -97,11 +101,10 @@ const Orders = () => {
                         ))}
                     </select>
                 </div>
-                <button type="submit">Create Order</button>
+                <button id="submit-form-button" type="submit">Create Order</button>
             </form>
         </div>
     );
-
 };
 
 export default Orders;
