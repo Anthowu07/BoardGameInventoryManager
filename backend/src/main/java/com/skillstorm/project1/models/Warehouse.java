@@ -67,11 +67,11 @@ public class Warehouse {
         this.num_items = num_items;
     }
 
-    @Override
-    public String toString() {
-        return "Warehouse [warehouse_id=" + warehouse_id + ", name=" + name + ", capacity=" + capacity + ", num_items="
-                + num_items + "]";
-    }
+    // @Override
+    // public String toString() {
+    //     return "Warehouse [warehouse_id=" + warehouse_id + ", name=" + name + ", capacity=" + capacity + ", num_items="
+    //             + num_items + "]";
+    // }
 
     
 }

@@ -1,11 +1,11 @@
-package com.skillstorm.project1;
+package com.skillstorm.project1.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
 import org.junit.After;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import com.skillstorm.project1.models.BoardGame;
 import com.skillstorm.project1.models.Order;

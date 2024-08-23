@@ -1,14 +1,13 @@
-package com.skillstorm.project1;
+package com.skillstorm.project1.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.After;
-
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import com.skillstorm.project1.models.BoardGame;
 
-public class BoardgameTest {
+public class BoardGameTest {
 
     BoardGame boardGame1;
     BoardGame boardGame2;

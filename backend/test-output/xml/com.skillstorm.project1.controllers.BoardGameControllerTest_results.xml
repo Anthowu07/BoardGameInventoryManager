@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestNGTest-8fc7fc47-cfc6-41d2-9aad-99f7d2255a7e"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.117">
+    <properties></properties>
+
+
+
+            <testcase
+                name="findAllBoardGamesTest"
+                time="0.117"
+                classname="com.skillstorm.project1.controllers.BoardGameControllerTest">
+            </testcase>
+</testsuite>
