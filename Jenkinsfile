@@ -55,6 +55,7 @@ pipeline {
                 sh "cd backend && mvn clean install && ls target/"
 
                 withSonarQubeEnv('SonarCloud') {
+                    sh "cd backend"
                     sh '''
                     mvn sonar:sonar \
                         -Dsonar.projectKey=Anthowu07_BoardGameInventoryManager \
