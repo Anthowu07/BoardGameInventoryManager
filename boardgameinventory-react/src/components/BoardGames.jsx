@@ -1,5 +1,3 @@
-//TODO: Upload this to S3 bucket using Jenkins
-
 import React, { useEffect, useState } from 'react';
 import { getBoardGames, createBoardGame, deleteBoardGame, updateBoardGame } from '../services/boardgameApi';
 import './BoardGames.css';

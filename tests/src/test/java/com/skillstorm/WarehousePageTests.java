@@ -78,28 +78,25 @@ public class WarehousePageTests {
     @When("I press the {string} button on the {string} warehouse")
     public void iPressTheButtonOnTheWarehouse(String buttonText, String warehouseName) {
         try {
-        // Use XPath to find the card based on the warehouse name
-        String cardXPath = String.format(
-                "//div[@class='warehouse-container']//div[@class='card']//div[@class='container'][h2[b[text()='%s']]]",
-                warehouseName);
+            // Use XPath to find the card based on the warehouse name
+            String cardXPath = String.format(
+                    "//div[@class='warehouse-container']//div[@class='card']//div[@class='container'][h2[b[text()='%s']]]",
+                    warehouseName);
 
-                WebElement card = driver.findElement(By.xpath(cardXPath));
+            WebElement card = driver.findElement(By.xpath(cardXPath));
 
-        // Hover over the card to make the delete button visible
-        Actions actions = new Actions(driver);
-        actions.moveToElement(card).perform();
+            // Hover over the card to make the delete button visible
+            Actions actions = new Actions(driver);
+            actions.moveToElement(card).perform();
 
-        // Find the delete button within the card (now visible)
-        WebElement deleteButton = wait
-        .until(ExpectedConditions.elementToBeClickable(By.xpath(".//button[@id='delete_button']")));
-
-        // Click the delete button
-        deleteButton.click();
+            // Now locate the delete button within that container and click it
+            WebElement button = card.findElement(By.id(buttonText));
+            button.click();
 
         } catch (NoSuchElementException e) {
-        System.out.println("Element not found: " + e.getMessage());
-        System.out.println("Page Source: " + driver.getPageSource());
-        throw e;
+            System.out.println("Element not found: " + e.getMessage());
+            System.out.println("Page Source: " + driver.getPageSource());
+            throw e;
         }
     }
 
@@ -134,5 +131,11 @@ public class WarehousePageTests {
         // If the element is not visible, assert that it's not in the grid
         Assert.assertTrue(isNotVisible,
                 "Warehouse with name " + warehouseName + " is still visible grid, but it should not be.");
+    }
+
+    @Then("I should see join table page")
+    public void iShouldSeeJoinTablePage(){
+        WebElement header = driver.findElement(By.id("join-table-header"));
+        Assert.assertTrue(header.isDisplayed(), "Board Games in Warehouses header should be visible but is not");
     }
 }
