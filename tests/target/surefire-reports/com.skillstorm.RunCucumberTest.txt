@@ -1,4 +1,17 @@
 -------------------------------------------------------------------------------
 Test set: com.skillstorm.RunCucumberTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.127 s - in com.skillstorm.RunCucumberTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 12.515 s <<< FAILURE! - in com.skillstorm.RunCucumberTest
+Display a grid of warehouse cards with information on it's current and max capacity. Allow adding and deleting warehouses as well as viewing inventory in the warehouse..Delete a warehouse  Time elapsed: 12.397 s  <<< ERROR!
+org.openqa.selenium.TimeoutException: 
+Expected condition failed: waiting for element to be clickable: By.xpath: .//button[@id='delete_button'] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.23.0', revision: '4df0a231af'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 128.0.6613.84, chrome: {chromedriverVersion: 128.0.6613.84 (606aa55c7d68..., userDataDir: C:\Users\ANTHON~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:49268}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:49268/devtoo..., se:cdpVersion: 128.0.6613.84, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 707773aebd3422cb1ebc9d2e82ac01b2
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.skillstorm.WarehousePageTests.iPressTheButtonOnTheWarehouse(WarehousePageTests.java:94)
+	at ✽.I press the "Delete" button on the "Catan" warehouse(classpath:com/skillstorm/warehouses.feature:33)
+

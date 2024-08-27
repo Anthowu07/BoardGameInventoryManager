@@ -53,7 +53,7 @@ const WarehouseList = () => {
 
     return (
         <div className="warehouse-container">
-            <button onClick={toggleForm} className="add-warehouse-button">
+            <button onClick={toggleForm} className="add-warehouse-button" id='toggle-form-button'>
                 {showForm ? 'Cancel' : 'Add Warehouse'}
             </button>
             {showForm && (
@@ -61,21 +61,23 @@ const WarehouseList = () => {
                     <h2>Add Warehouse</h2>
                     <input
                         type="text"
+                        id='name-field'
                         placeholder="Name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
                     <input
                         type="number"
+                        id="capacity-field"
                         placeholder="Capacity"
                         value={capacity}
                         onChange={(e) => setCapacity(e.target.value)}
                     />
-                    <button onClick={handleCreateWarehouse}>Create Warehouse</button>
+                    <button id='submit-form-button' onClick={handleCreateWarehouse}>Create Warehouse</button>
                 </div>
             )}
             {error && <div>Error: {error}</div>}
-            <div className="cards">
+            <div className="cards" id='warehouses-grid'>
                 {warehouses.map((warehouse) => (
                     <Card
                     key={warehouse.warehouse_id}

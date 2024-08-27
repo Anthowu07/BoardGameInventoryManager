@@ -21,19 +21,6 @@ public class BoardGamePageTests {
     WebDriver driver;
     WebDriverWait wait;
 
-    // @Before()
-    // public void before() {
-    //     driver = new ChromeDriver();
-    //     wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    // }
-
-    // @After()
-    // public void after() {
-    //     if (driver != null) {
-    //         driver.quit();
-    //     }
-    // }
-
     @Before
     public void setUp() {
         driver = WebDriverSingleton.getDriver();
@@ -111,7 +98,6 @@ public class BoardGamePageTests {
         // Wait for the alert popup to appear after clicking delete
         wait.until(ExpectedConditions.alertIsPresent());
         if (action.equalsIgnoreCase("OK")) {
-            // Assuming the popup is a JavaScript alert
             driver.switchTo().alert().accept();
         } else if (action.equalsIgnoreCase("Cancel")) {
             driver.switchTo().alert().dismiss();
