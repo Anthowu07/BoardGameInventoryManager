@@ -54,24 +54,16 @@ pipeline {
             steps{
                 dir('backend'){
                     sh "mvn clean install && ls target/"
-
+                    
                     withSonarQubeEnv('SonarCloud') {
                         sh '''
                         mvn sonar:sonar \
                             -Dsonar.projectKey=Anthowu07_BoardGameInventoryManager \
                             -Dsonar.projectName=boardgame-manager-backend \
                             -Dsonar.java.binaries=target/classes \
+                            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
                         '''
                     }
-                    // withSonarQubeEnv('SonarCloud') {
-                    //     sh '''
-                    //     mvn sonar:sonar \
-                    //         -Dsonar.projectKey=Anthowu07_BoardGameInventoryManager \
-                    //         -Dsonar.projectName=boardgame-manager-backend \
-                    //         -Dsonar.java.binaries=target/classes \
-                    //         -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-                    //     '''
-                    // }
 
                 }
                 
