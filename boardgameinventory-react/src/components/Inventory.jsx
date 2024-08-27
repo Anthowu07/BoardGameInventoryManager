@@ -89,19 +89,20 @@ const InventoryList = () => {
                     <span>Editing quantity of {name} in the {warehouseName} Warehouse</span>
                     <input
                         type="number"
+                        id="quantity-field"
                         placeholder="Quantity Available"
                         value={quantity_available}
                         onChange={(e) => setQuantity_Available(e.target.value)}
                     />
-                    <button onClick={handleUpdateInventory}>
+                    <button id="submit-form-button" onClick={handleUpdateInventory}>
                         {'Update'}
                     </button>
-                    <button onClick={toggleForm}>
+                    <button id="cancel-form-button" onClick={toggleForm}>
                         {'Cancel'}
                     </button>
                 </div>
             )}
-            <table>
+            <table id="inventory-table">
                 <thead>
                     <tr>
                         <th>Inventory ID</th>
@@ -112,17 +113,17 @@ const InventoryList = () => {
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="inventory-table-body">
                     {inventory.map((inventory) => (
-                        <tr key={inventory.inventory_id}>
-                            <td>{inventory.inventory_id}</td>
-                            <td>{inventory.boardgame.name}</td>
-                            <td>{inventory.boardgame.publisher}</td>
-                            <td>{inventory.quantity_available}</td>
-                            <td>{inventory.warehouse.name}</td>
+                        <tr id="inventory-table-row" key={inventory.inventory_id}>
+                            <td id="inventory-id">{inventory.inventory_id}</td>
+                            <td id="board-game-name">{inventory.boardgame.name}</td>
+                            <td id="board-game-publisher">{inventory.boardgame.publisher}</td>
+                            <td id="quantity-available">{inventory.quantity_available}</td>
+                            <td id="warehouse-name">{inventory.warehouse.name}</td>
                             <td>
-                                <button onClick={() => handleDeleteInventory(inventory.inventory_id)}>Delete</button>
-                                <button onClick={() => handleEditInventory(inventory)}>Edit Quantity</button>
+                                <button id="delete-button" onClick={() => handleDeleteInventory(inventory.inventory_id)}>Delete</button>
+                                <button id="edit-button" onClick={() => handleEditInventory(inventory)}>Edit Quantity</button>
                             </td>
                         </tr>
                     ))}

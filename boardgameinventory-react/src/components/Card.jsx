@@ -26,8 +26,8 @@ const Card = ({ warehouse, onDelete }) => {
         <h2><b>{warehouse.name}</b></h2>
         <p>Number of Items: {warehouse.num_items}</p>
         <p>Capacity: {warehouse.capacity}</p>
-        <Link to={`/warehouses/${warehouse.warehouse_id}/inventories`}>View Inventory</Link>
-        <button className="delete-button" onClick={handleDelete}>Delete</button>
+        <Link to={`/warehouses/${warehouse.warehouse_id}/inventories`} id='view_inventory_button'>View Inventory</Link>
+        <button className="delete-button" onClick={handleDelete} id='delete_button'>Delete</button>
       </div>
     </div>
   );

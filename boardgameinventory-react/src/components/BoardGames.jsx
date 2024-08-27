@@ -46,7 +46,7 @@ const BoardGameList = () => {
         console.log('Deleting board game with id:', boardgame_id); // Log the id
         // Show confirmation dialog with a message about cascading deletes
         const userConfirmed = window.confirm(
-            'Are you sure you want to delete this warehouse? All associated inventory will also be deleted.'
+            'Are you sure you want to delete this board game? All associated inventory will also be deleted.'
         );
         if (userConfirmed) {
             try {
@@ -98,36 +98,39 @@ const BoardGameList = () => {
     return (
         <div className="container">
             {error && <p className="error">{error}</p>}
-            <button onClick={toggleForm}>
+            <button id="toggle-form-button" onClick={toggleForm}>
                 {showForm ? 'Cancel' : 'Add Board Game'}
             </button>
             {showForm && (
                 <div className="form-container">
-                    <h2>{editing ? 'Edit Board Game' : 'Add Board Game'}</h2>
+                    <h2 id="form-title">{editing ? 'Edit Board Game' : 'Add Board Game'}</h2>
                     <input
                         type="text"
+                        id="name-field"
                         placeholder="Name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
                     <input
                         type="text"
+                        id="publisher-field"
                         placeholder="Publisher"
                         value={publisher}
                         onChange={(e) => setPublisher(e.target.value)}
                     />
                     <input
                         type="number"
+                        id="reorder-quantity-field"
                         placeholder="Reorder Quantity"
                         value={reorder_quantity}
                         onChange={(e) => setReorder_Quantity(e.target.value)}
                     />
-                    <button onClick={editing ? handleUpdateBoardGame : handleCreateBoardGame}>
+                    <button id="submit-form-button" onClick={editing ? handleUpdateBoardGame : handleCreateBoardGame}>
                         {editing ? 'Update' : 'Create'}
                     </button>
                 </div>
             )}
-            <table>
+            <table id="board-game-table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -136,15 +139,15 @@ const BoardGameList = () => {
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="boardgame-table-body">
                     {boardgames.map(boardgame => (
-                        <tr key={boardgame.boardgame_id}>
-                            <td>{boardgame.name}</td>
-                            <td>{boardgame.publisher}</td>
-                            <td>{boardgame.reorder_quantity}</td>
+                        <tr id="board-game-table-row" key={boardgame.boardgame_id}>
+                            <td id="board-game-name">{boardgame.name}</td>
+                            <td id="board-game-publisher">{boardgame.publisher}</td>
+                            <td id="board-game-reorder-quantity">{boardgame.reorder_quantity}</td>
                             <td>
-                                <button onClick={() => handleDeleteBoardGame(boardgame.boardgame_id)}>Delete</button>
-                                <button onClick={() => handleEditBoardGame(boardgame)}>Edit</button>
+                                <button id="delete-button" onClick={() => handleDeleteBoardGame(boardgame.boardgame_id)}>Delete</button>
+                                <button id="edit-button" onClick={() => handleEditBoardGame(boardgame)}>Edit</button>
                             </td>
                         </tr>
                     ))}

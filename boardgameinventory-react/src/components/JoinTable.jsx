@@ -11,7 +11,7 @@ const JoinTable = () => {
     const fetchJoinTableData = async () => {
       console.log('Fetching data...');
       try {
-        const response = await fetch(`http://localhost:8080/warehouses/${id}/inventories`); // Adjust the API endpoint as needed
+        const response = await fetch(`http://localhost:8080/api/warehouses/${id}/inventories`);
         if (!response.ok) {
           console.error('Network response was not ok:', response.statusText);
           throw new Error('Network response was not ok');
@@ -31,7 +31,7 @@ const JoinTable = () => {
 
   return (
     <div className="container">
-      <h2>Board Games in Warehouse</h2>
+      <h2 id='join-table-header'>Board Games in Warehouse</h2>
       {error && <div>Error: {error}</div>}
       <table>
         <thead>
