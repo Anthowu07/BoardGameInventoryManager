@@ -15,7 +15,14 @@ pipeline {
                 dir('boardgameinventory-react'){
                     sh "echo Building Frontend"
                     sh "npm install && npm run build"
+                }
+            }
+        }
 
+        stage('Test Frontend'){
+            steps{
+                dir('tests'){
+                    sh "mvn test"
                     withSonarQubeEnv('SonarCloud') {
                         sh '''
                             npx sonar-scanner \
@@ -25,14 +32,6 @@ pipeline {
                             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
                         '''
                     }
-                }
-            }
-        }
-
-        stage('Test Frontend'){
-            steps{
-                dir('tests'){
-                    sh "mvn test"
                 }
             }
         }
