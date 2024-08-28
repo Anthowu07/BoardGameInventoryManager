@@ -35,8 +35,7 @@ public class WarehousePageTests {
 
     @Given("I am on the warehouses page")
     public void IAmOnTheWarehousesPage() {
-        // driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/warehouses");
-        driver.get("http://localhost:5173/warehouses");
+        driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/warehouses");
     }
 
     @When("the warehouses page is fully loaded")

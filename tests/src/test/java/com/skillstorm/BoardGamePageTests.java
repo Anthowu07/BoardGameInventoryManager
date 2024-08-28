@@ -34,8 +34,7 @@ public class BoardGamePageTests {
 
     @Given("I am on the board game page")
     public void iAmOnTheBoardGamePage() {
-        // driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/boardgames");
-        driver.get("http://localhost:5173/boardgames");
+        driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/boardgames");
        
     }
 

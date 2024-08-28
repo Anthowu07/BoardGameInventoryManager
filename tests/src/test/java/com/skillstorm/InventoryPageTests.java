@@ -44,14 +44,12 @@ public class InventoryPageTests {
 
     @Given("I am on the inventory page")
     public void iAmOnTheInventoryPage() {
-        // driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/inventory");
-        driver.get("http://localhost:5173/inventory");
+        driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/inventory");
     }
 
     @Given("I am on the orders page")
     public void iAmOnTheOrdersPage() {
-        // driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/orders");
-        driver.get("http://localhost:5173/orders");
+        driver.get("http://boardgame-inventory-management.s3-website-us-east-1.amazonaws.com/orders");
     }
 
     @When("the inventory page is fully loaded")

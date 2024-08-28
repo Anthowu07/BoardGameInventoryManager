@@ -20,10 +20,30 @@ pipeline {
             }
         }
 
-        stage('Build Frontend'){
+        stage('Build and Analyze Frontend'){
             steps{
-                sh "echo Building Frontend"
-                sh "cd boardgameinventory-react && npm install && npm run build"
+                dir('boardgameinventory-react'){
+                    sh "echo Building Frontend"
+                    sh "npm install && npm run build"
+
+                    withSonarQubeEnv('SonarCloud') {
+                        '''
+                            npx sonar-scanner \
+                            -Dsonar.projectKey=anthowu07_boardgame-manager-frontend \
+                            -Dsonar.projectName=boardgame-manager-frontend \
+                            -Dsonar.sources=src \
+                            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+                        '''
+                    } 
+                }
+            }
+        }
+
+        stage('Test Frontend'){
+            steps{
+                dir('tests'){
+                    sh "mvn test"
+                }
             }
         }
 
@@ -50,7 +70,7 @@ pipeline {
             }
         }
 
-        stage('Build Backend'){
+        stage('Build and Analyze Backend'){
             steps{
                 dir('backend'){
                     sh "mvn clean install && ls target/"
