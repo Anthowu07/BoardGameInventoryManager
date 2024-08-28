@@ -25,6 +25,7 @@ pipeline {
                 dir('boardgameinventory-react'){
                     sh "echo Building Frontend"
                     sh "npm install && npm run build"
+                    sh "mvn test"
 
                     withSonarQubeEnv('SonarCloud') {
                         sh '''
