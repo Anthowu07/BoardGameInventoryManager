@@ -1,2 +1,5 @@
 com\skillstorm\BoardGamePageTests.class
+com\skillstorm\InventoryPageTests.class
+com\skillstorm\WarehousePageTests.class
+com\skillstorm\WebDriverSingleton.class
 com\skillstorm\RunCucumberTest.class
