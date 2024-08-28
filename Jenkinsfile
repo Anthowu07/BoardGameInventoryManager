@@ -10,16 +10,6 @@ pipeline {
     
     stages{
 
-        stage('Prepare Version') {
-            steps {
-                script {
-                    def newPatchVersion = PATCH_VERSION.toInteger() + 1
-                    env.VERSION = "${MAJOR_VERSION}.${MINOR_VERSION}.${newPatchVersion}"
-                    echo "Updated version to: ${env.VERSION}"
-                }
-            }
-        }
-
         stage('Build and Analyze Frontend'){
             steps{
                 dir('boardgameinventory-react'){
@@ -91,6 +81,16 @@ pipeline {
         stage('Test Backend'){
             steps{
                 sh "cd backend && mvn test"
+            }
+        }
+
+        stage('Prepare Version') {
+            steps {
+                script {
+                    def newPatchVersion = PATCH_VERSION.toInteger() + 1
+                    env.VERSION = "${MAJOR_VERSION}.${MINOR_VERSION}.${newPatchVersion}"
+                    echo "Updated version to: ${env.VERSION}"
+                }
             }
         }
 
