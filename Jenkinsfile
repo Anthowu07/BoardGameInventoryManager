@@ -27,14 +27,14 @@ pipeline {
                     sh "npm install && npm run build"
 
                     withSonarQubeEnv('SonarCloud') {
-                        ...
+                        sh '''
                             npx sonar-scanner \
                             -Dsonar.projectKey=anthowu07_boardgame-manager-frontend \
                             -Dsonar.projectName=boardgame-manager-frontend \
                             -Dsonar.sources=src \
                             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-                        ...
-                    } 
+                        '''
+                    }
                 }
             }
         }
