@@ -1,13 +1,10 @@
 package com.skillstorm.project1.models;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-
-import com.skillstorm.project1.models.BoardGame;
-import com.skillstorm.project1.models.Inventory;
-import com.skillstorm.project1.models.Warehouse;
 
 public class InventroyTest {
 
@@ -21,8 +18,8 @@ public class InventroyTest {
     Warehouse warehouse1;
     Warehouse warehouse2;
 
-    @Test
-    public void testInventory() {
+    @Before
+    public void setup() {
         boardGame1 = new BoardGame(0, "Chess", "India", 5);
         boardGame1 = new BoardGame(1, "Checkers", "England", 10);
 
@@ -43,7 +40,10 @@ public class InventroyTest {
         inventory2.setMinimum_stock_level(0);
 
         inventory3 = new Inventory(2, boardGame1, warehouse1, 5, 10, 20, 1);
+    }
 
+    @Test
+    public void testInventory() {
         assertEquals(0, inventory1.getInventory_id());
         assertEquals(boardGame1, inventory1.getBoardgame());
         assertEquals(warehouse1, inventory1.getWarehouse());
@@ -71,7 +71,7 @@ public class InventroyTest {
     }
 
     @After
-    public void teardownBoardGamesAndWarehousesAndInventory() {
+    public void teardown() {
         warehouse1 = null;
         warehouse2 = null;
 

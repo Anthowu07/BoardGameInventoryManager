@@ -39,9 +39,9 @@ public class OrderController {
     @Autowired
     private WarehouseService warehouseService;
 
-    public OrderController(OrderService service) {
-        this.service = service;
-    }
+    // public OrderController(OrderService service) {
+    //     this.service = service;
+    // }
 
     @GetMapping
     public Iterable<Order> findAllOrders(){

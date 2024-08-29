@@ -1,19 +1,19 @@
 package com.skillstorm.project1.models;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-import com.skillstorm.project1.models.Warehouse;
 
 public class WarehouseTest {
 
     Warehouse warehouse1;
     Warehouse warehouse2;
 
-    @Test
-    public void testWarehouse() {
+    @Before
+    public void setup() {
         warehouse1 = new Warehouse();
         warehouse1.setWarehouse_id(0);
         warehouse1.setName("warehouse1");
@@ -21,7 +21,10 @@ public class WarehouseTest {
         warehouse1.setNum_items(30);
 
         warehouse2 = new Warehouse(1, "warehouse2", 200, 60);
+    }
 
+    @Test
+    public void testWarehouse() {
         assertEquals(0, warehouse1.getWarehouse_id());
         assertEquals("warehouse1", warehouse1.getName());
         assertEquals(100, warehouse1.getCapacity());
@@ -34,7 +37,7 @@ public class WarehouseTest {
     }
 
     @After
-    public void tearDownWarehouses() {
+    public void teardown() {
         warehouse1 = null;
         warehouse2 = null;
     }

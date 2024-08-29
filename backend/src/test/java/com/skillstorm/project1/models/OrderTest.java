@@ -1,15 +1,12 @@
 package com.skillstorm.project1.models;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-
-import com.skillstorm.project1.models.BoardGame;
-import com.skillstorm.project1.models.Order;
-import com.skillstorm.project1.models.Warehouse;
 
 public class OrderTest {
 
@@ -25,8 +22,8 @@ public class OrderTest {
     LocalDate date1; 
     LocalDate date2;
 
-    @Test 
-    public void testOrder() {
+    @Before
+    public void setup() {
         boardGame1 = new BoardGame(0, "Chess", "India", 5);
         boardGame1 = new BoardGame(1, "Checkers", "England", 10);
 
@@ -44,7 +41,10 @@ public class OrderTest {
         order1.setDate(date1);
 
         order2 = new Order(1, boardGame2, warehouse2, 5, date2);
+    }
 
+    @Test 
+    public void testOrder() {
         assertEquals(0, order1.getOrder_id());
         assertEquals(boardGame1, order1.getBoardgame());
         assertEquals(warehouse1, order1.getWarehouse());
@@ -60,7 +60,7 @@ public class OrderTest {
     }
 
     @After
-    public void teardownBoardGamesAndWarehousesAndOrders() {
+    public void teardown() {
         warehouse1 = null;
         warehouse2 = null;
 
