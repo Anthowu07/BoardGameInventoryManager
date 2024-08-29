@@ -35,9 +35,9 @@ public class InventoryController {
     @Autowired
     private WarehouseService warehouseService;
 
-    public InventoryController(InventoryService service) {
-        this.service = service;
-    }
+    // public InventoryController(InventoryService service) {
+    //     this.service = service;
+    // }
 
     @GetMapping
     public Iterable<Inventory> findAllInventories(){

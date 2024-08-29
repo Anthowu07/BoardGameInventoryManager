@@ -64,11 +64,11 @@ public class BoardGame {
 
     public void setReorder_quantity(int reorder_quantity) {
         this.reorder_quantity = reorder_quantity;
-    }
+    } 
 
-    @Override
-    public String toString() {
-        return "BoardGame [boardgame_id=" + boardgame_id + ", name=" + name + ", publisher=" + publisher
-                + ", reorder_quantity=" + reorder_quantity + "]";
-    }
+    // @Override
+    // public String toString() {
+    //     return "BoardGame [boardgame_id=" + boardgame_id + ", name=" + name + ", publisher=" + publisher
+    //             + ", reorder_quantity=" + reorder_quantity + "]";
+    // }
 }

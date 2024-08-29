@@ -25,9 +25,9 @@ public class BoardGameController {
     @Autowired
     private BoardGameService service;
 
-    public BoardGameController(BoardGameService service) {
-        this.service = service;
-    }
+    // public BoardGameController(BoardGameService service) {
+    //     this.service = service;
+    // }
 
     @GetMapping
     public Iterable<BoardGame> findAllBoardGames(){
@@ -52,6 +52,7 @@ public class BoardGameController {
 
         //Returns code 409 CONFLICT if boardgame id alredy exists in database
         if(existingBoardGame.isPresent()){
+
             return new ResponseEntity<>(boardgame, HttpStatus.CONFLICT);
         }
         boardgame = service.save(boardgame);

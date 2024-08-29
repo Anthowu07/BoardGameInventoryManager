@@ -20,9 +20,9 @@ public class WarehouseService {
     @Autowired
     private InventoryRepo inventoryRepo;
 
-    public WarehouseService(WarehouseRepo repo) {
-        this.repo = repo;
-    }
+    // public WarehouseService(WarehouseRepo repo) {
+    //     this.repo = repo;
+    // }
 
     public Iterable<Warehouse> findAll(){
         return repo.findAll();

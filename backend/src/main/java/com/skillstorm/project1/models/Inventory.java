@@ -119,10 +119,10 @@ public class Inventory {
         this.minimum_stock_level = minimum_stock_level;
     }
 
-    @Override
-    public String toString() {
-        return "Inventory [inventory_id=" + inventory_id + ", boardgame=" + boardgame + ", warehouse=" + warehouse
-                + ", quantity_available=" + quantity_available + ", reorder_point=" + reorder_point
-                + ", maximum_stock_level=" + maximum_stock_level + ", minimum_stock_level=" + minimum_stock_level + "]";
-    }
+    // @Override
+    // public String toString() {
+    //     return "Inventory [inventory_id=" + inventory_id + ", boardgame=" + boardgame + ", warehouse=" + warehouse
+    //             + ", quantity_available=" + quantity_available + ", reorder_point=" + reorder_point
+    //             + ", maximum_stock_level=" + maximum_stock_level + ", minimum_stock_level=" + minimum_stock_level + "]";
+    // }
 }
