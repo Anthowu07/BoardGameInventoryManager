@@ -67,7 +67,7 @@ const Orders = () => {
 
     return (
         <div>
-            <h2>Create Order</h2>
+            <h2>Place Order</h2>
             {error && <p className="error">{error}</p>}
             {successMessage && <p className="success">{successMessage}</p>} {/* Display success message */}
             <form id="orders-form" onSubmit={handleSubmit}>
