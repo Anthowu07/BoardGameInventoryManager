@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import './BoardGames.css'
+import { fetchJoinTableData } from '../services/joinTableApi';
+import './BoardGames.css';
 
 const JoinTable = () => {
   const { id } = useParams();
@@ -8,30 +9,21 @@ const JoinTable = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchJoinTableData = async () => {
-      console.log('Fetching data...');
+    const loadJoinTableData = async () => {
       try {
-        const response = await fetch(`http://boardgame-inventory-env-4.eba-9ddwy6jr.us-east-1.elasticbeanstalk.com:8080/api/warehouses/${id}/inventories`);
-        if (!response.ok) {
-          console.error('Network response was not ok:', response.statusText);
-          throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        
-        setJoinTableData(Array.isArray(data) ? data : []);
+        const data = await fetchJoinTableData(id);
+        setJoinTableData(data);
       } catch (error) {
-        console.error('Fetch error:', error);
         setError(error.message);
       }
     };
 
-    fetchJoinTableData();
+    loadJoinTableData();
   }, [id]);
 
   return (
     <div className="container">
-      <h2 id='join-table-header'>Board Games in Warehouse</h2>
+      <h2 id="join-table-header">Board Games in Warehouse</h2>
       {error && <div>Error: {error}</div>}
       <table>
         <thead>
