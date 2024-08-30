@@ -15,6 +15,18 @@ pipeline {
                 dir('boardgameinventory-react'){
                     sh "echo Building Frontend"
                     sh "npm install && npm run build"
+
+                    // SonarQube Analysis for frontend files
+                    // Requires Jest tests for coverage
+                    withSonarQubeEnv('SonarCloud') {
+                        sh '''
+                            npx sonar-scanner \
+                            -Dsonar.projectKey=anthowu07_boardgame-manager-frontend \
+                            -Dsonar.projectName=boardgame-manager-frontend \
+                            -Dsonar.sources=src \
+                            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+                        '''
+                    }
                 }
             }
         }
@@ -22,17 +34,19 @@ pipeline {
         stage('Test Frontend'){
             steps{
                 dir('tests'){
-                    sh "mvn test"
-                    withSonarQubeEnv('SonarCloud') {
-                        sh '''
-                            npx sonar-scanner \
-                            -Dsonar.projectKey=anthowu07_boardgame-manager-frontend \
-                            -Dsonar.projectName=boardgame-manager-frontend \
-                            -Dsonar.sources=src \
-                            -Dsonar.java.binaries=target/test-classes \
-                            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-                        '''
-                    }
+                    sh "mvn test"\
+
+                    // SonarQube Analysis for /tests
+                    // withSonarQubeEnv('SonarCloud') {
+                    //     sh '''
+                    //         npx sonar-scanner \
+                    //         -Dsonar.projectKey=anthowu07_boardgame-manager-frontend \
+                    //         -Dsonar.projectName=boardgame-manager-frontend \
+                    //         -Dsonar.sources=src \
+                    //         -Dsonar.java.binaries=target/test-classes \
+                    //         -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+                    //     '''
+                    // }
                 }
             }
         }
