@@ -8,6 +8,6 @@ module.exports = {
   coverageReporters: ["text", "lcov"],
   collectCoverageFrom: ['src/**/*.{js,jsx}'],          //Specify the source code to obtain coverage from
   moduleNameMapper: {                                  //moduleNameMapper used to mock css style sheets to an empty styleMock.js, essentially ignoring them
-    '\\.(css|less)$': '<rootDir>/mocks/styleMock.js',
+    '\\.(css|less)$': '<rootDir>/src/assets/styleMock.js',
   },
 };
