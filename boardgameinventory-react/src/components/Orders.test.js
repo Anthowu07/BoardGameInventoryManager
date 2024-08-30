@@ -13,10 +13,12 @@ jest.mock('../services/warehouseApi');
 
 //Mock Data
 const mockBoardGames = [
-    { boardgame_id: 1, name: 'Catan', publisher: 'Kosmos', reorder_quantity: 5 },
+    { boardgame_id: 1, name: 'Catan'},
+    { boardgame_id: 2, name: 'Ticket to Ride'},
 ];
 const mockWarehouses = [
-    { warehouse_id: 1, name: 'Warehouse 1', capacity: 100, num_items: 10 },
+    { warehouse_id: 1, name: 'Warehouse A'},
+    { warehouse_id: 2, name: 'Warehouse B'},
 ];
 
 beforeEach(() => {
@@ -32,42 +34,54 @@ afterEach(() => {
 });
 
 describe('Place Order Form', () => {
+    //Checks for proper render
+    test('renders form correctly', async () => {
+        // Wait for the dropdowns to be populated
+        await waitFor(() => {
+            expect(screen.getByText('Catan')).toBeInTheDocument();
+            expect(screen.getByText('Warehouse A')).toBeInTheDocument();
+        });
+
+        // Check that the form elements are rendered
+        expect(screen.getByLabelText(/board game/i)).toBeInTheDocument();
+        expect(screen.getByLabelText(/warehouse/i)).toBeInTheDocument();
+        expect(screen.getByText(/create order/i)).toBeInTheDocument();
+    });
+
+    //Checks for error message
+    test('shows error message when form is submitted without selecting board game or warehouse', async () => {
+        // Wait for the button to render
+        await waitFor(() => {
+            expect(screen.getByText(/create order/i)).toBeInTheDocument();
+        });
+
+        // Submit the form without selecting anything
+        fireEvent.click(screen.getByText(/create order/i));
+
+        // Check that the error message is displayed
+        expect(await screen.findByText('Please select both a board game and a warehouse.')).toBeInTheDocument();
+    });
+
     //Tests placing an order
-    test('handles editing an inventory entry and the form buttons', async () => {
+    test('shows success message when order is created successfully', async () => {
 
-        // // Click "Edit" button for the first inventory entry
-        // fireEvent.click(screen.getByDisplayValue('Select a board game'));
+        // Wait for the button to render
+        await waitFor(() => {
+            expect(screen.getByText(/create order/i)).toBeInTheDocument();
+        });
 
-        // // Check if the dropdown options are visible
-        // await waitFor(() => {
-        //     expect(screen.getAllByRole('option').length).toBeGreaterThan(1);
-        // });
+        // Select a board game and a warehouse
+        fireEvent.change(screen.getByLabelText(/board game/i), { target: { value: 1 } });
+        fireEvent.change(screen.getByLabelText(/warehouse/i), { target: { value: 1 } });
 
-        // // Click on the "Catan" option on the dropdown
-        // fireEvent.click(screen.getByText('Catan'));
+        // Submit the form
+        fireEvent.click(screen.getByText(/create order/i));
 
-        // // Click "Edit" button for the first inventory entry
-        // fireEvent.click(screen.getByDisplayValue('Select a warehouse'));
+        // Check that the success message is displayed
+        expect(await screen.findByText('Order Placed!')).toBeInTheDocument();
 
-        // // Click on the "Warehouse 1" option on the dropdown
-        // fireEvent.click(screen.getByText('Warehouse 1'));
-
-        // // Click "Edit" button for the first inventory entry
-        // fireEvent.click(screen.getByDisplayValue('Create Order'));
-
-        // // Check that updateInventory was called
-        // expect(updateInventory).toHaveBeenCalledWith({
-        //     inventory_id: 1,
-        //     boardgame: { name: 'Catan', publisher: 'Kosmos' },
-        //     name: "Catan",
-        //     publisher: "Kosmos",
-        //     quantity_available: "20",
-        //     warehouse: { name: 'Warehouse' }
-        // });
-
-        // // Check if confirmation message is shown
-        // await waitFor(() => {
-        //     expect(screen.getByText('Order Placed!')).toBeInTheDocument();
-        // });
+        // Check that the form fields are reset
+        expect(screen.getByLabelText(/board game/i).value).toBe('');
+        expect(screen.getByLabelText(/warehouse/i).value).toBe('');
     });
 });
