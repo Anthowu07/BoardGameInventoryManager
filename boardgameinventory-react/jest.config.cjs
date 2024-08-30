@@ -9,5 +9,6 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.{js,jsx}'],          //Specify the source code to obtain coverage from
   moduleNameMapper: {                                  //moduleNameMapper used to mock css style sheets to an empty styleMock.js, essentially ignoring them
     '\\.(css|less)$': '<rootDir>/src/assets/styleMock.js',
+    '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/src/assets/imageMock.js',
   },
 };

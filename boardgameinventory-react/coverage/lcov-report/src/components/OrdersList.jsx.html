@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -126,27 +126,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,7 +162,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,35 +179,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect, useState } from "react";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useEffect } from 'react';
 import { getOrders } from "../services/orderApi";
 import './BoardGames.css'
 &nbsp;
 &nbsp;
-const OrdersList = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+const OrdersList = () =&gt; {
 &nbsp;
-    const [orders, setOrders] = <span class="cstat-no" title="statement not covered" >useState([]);</span>
-    const [error, setError] = <span class="cstat-no" title="statement not covered" >useState(null);</span>
+    const [orders, setOrders] = useState([]);
+    const [error, setError] = useState(null);
 &nbsp;
     // Fetch orders
-<span class="cstat-no" title="statement not covered" >    useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-        const fetchOrders = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >            try {</span>
-                const data = <span class="cstat-no" title="statement not covered" >await getOrders();</span>
-<span class="cstat-no" title="statement not covered" >                setOrders(data);</span>
+    useEffect(() =&gt; {
+        const fetchOrders = async () =&gt; {
+            try {
+                const data = await getOrders();
+                setOrders(data);
             } catch (error) {
 <span class="cstat-no" title="statement not covered" >                setError(error.message);</span>
             }
         };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        fetchOrders();</span>
+        fetchOrders();
     }, []);
 &nbsp;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
+    return (
         &lt;div className="container"&gt;
             &lt;h2&gt;Recent Orders&lt;/h2&gt;
-            {error &amp;&amp; &lt;div&gt;Error: {error}&lt;/div&gt;}
+            {error &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >&lt;div&gt;Error: {error}&lt;/div&gt;}</span>
             &lt;table&gt;
                 &lt;thead&gt;
                     &lt;tr&gt;
@@ -219,8 +219,8 @@ const OrdersList = <span class="cstat-no" title="statement not covered" ><span c
                     &lt;/tr&gt;
                 &lt;/thead&gt;
                 &lt;tbody&gt;
-                    {orders.map(<span class="fstat-no" title="function not covered" >(o</span>rder) =&gt; (
-<span class="cstat-no" title="statement not covered" >                        &lt;tr key={order.order_id}&gt;</span>
+                    {orders.map((order) =&gt; (
+                        &lt;tr key={order.order_id}&gt;
                             &lt;td&gt;{order.order_id}&lt;/td&gt;
                             &lt;td&gt;{order.boardgame.name}&lt;/td&gt;
                             &lt;td&gt;{order.warehouse.name}&lt;/td&gt;
@@ -244,7 +244,7 @@ export default OrdersList</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-30T19:52:05.255Z
+                at 2024-08-30T20:57:58.040Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

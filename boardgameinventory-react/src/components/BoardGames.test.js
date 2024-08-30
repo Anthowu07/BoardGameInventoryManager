@@ -18,6 +18,7 @@ beforeEach(() => {
     createBoardGame.mockResolvedValue({});
     deleteBoardGame.mockResolvedValue({});
     updateBoardGame.mockResolvedValue({});
+    render(<BoardGameList />);
 });
 
 afterEach(() => {
@@ -26,7 +27,6 @@ afterEach(() => {
 });
 describe('Board Games List Component', () => {
     test('renders board game list with fetched data', async () => {
-        render(<BoardGameList />);
 
         // Assert that the table headers are rendered
         expect(screen.getByText('Name')).toBeInTheDocument();
@@ -42,7 +42,6 @@ describe('Board Games List Component', () => {
     });
 
     test('handles adding a new board game', async () => {
-        render(<BoardGameList />);
 
         // Click "Add Board Game" button to show the form
         fireEvent.click(screen.getByText('Add Board Game'));
@@ -67,7 +66,6 @@ describe('Board Games List Component', () => {
     });
 
     test('handles editing a board game', async () => {
-        render(<BoardGameList />);
 
         // Wait for the board games to be fetched and rendered
         await waitFor(() => {
@@ -98,7 +96,6 @@ describe('Board Games List Component', () => {
     });
 
     test('handles deleting a board game', async () => {
-        render(<BoardGameList />);
 
         // Wait for the board games to be fetched and rendered
         await waitFor(() => {
