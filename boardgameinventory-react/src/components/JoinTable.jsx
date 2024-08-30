@@ -11,7 +11,7 @@ const JoinTable = () => {
     const fetchJoinTableData = async () => {
       console.log('Fetching data...');
       try {
-        const response = await fetch(`http://localhost:8080/api/warehouses/${id}/inventories`);
+        const response = await fetch(`http://boardgame-inventory-env-4.eba-9ddwy6jr.us-east-1.elasticbeanstalk.com:8080/api/warehouses/${id}/inventories`);
         if (!response.ok) {
           console.error('Network response was not ok:', response.statusText);
           throw new Error('Network response was not ok');
