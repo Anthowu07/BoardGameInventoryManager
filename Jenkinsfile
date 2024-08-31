@@ -34,7 +34,7 @@ pipeline {
         stage('Test Frontend'){
             steps{
                 dir('tests'){
-                    sh "mvn test"\
+                    sh "mvn test"
 
                     // SonarQube Analysis for /tests
                     // withSonarQubeEnv('SonarCloud') {
@@ -47,6 +47,10 @@ pipeline {
                     //         -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
                     //     '''
                     // }
+                }
+
+                dir('boardgameinventory-react'){
+                    sh "npm test -- --coverage"
                 }
             }
         }
