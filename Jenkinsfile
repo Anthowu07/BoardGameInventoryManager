@@ -24,7 +24,7 @@ pipeline {
                             -Dsonar.projectKey=anthowu07_boardgame-manager-frontend \
                             -Dsonar.projectName=boardgame-manager-frontend \
                             -Dsonar.sources=src \
-                            -Dsonar.exclusions=**/*.test.js,services/** \
+                            -Dsonar.exclusions=**/*.test.js,src/services/** \
                             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
                         '''
                     }
