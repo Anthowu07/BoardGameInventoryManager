@@ -5,7 +5,7 @@ pipeline {
         MAJOR_VERSION = '0'
         MINOR_VERSION = '0'
         PATCH_VERSION = "${env.BUILD_NUMBER}"
-        JMETER_HOME = "/opt"
+        JMETER_HOME = "/opt/jmeter"
     }
     
     stages{
