@@ -5,10 +5,20 @@ pipeline {
         MAJOR_VERSION = '0'
         MINOR_VERSION = '0'
         PATCH_VERSION = "${env.BUILD_NUMBER}"
-
+        JMETER_HOME = "${env.WORKSPACE}/opt/jmeter"
     }
     
     stages{
+
+        stage('Jmeter Test'){
+            steps{
+                script{
+                    sh "env"
+                    sh "${JMETER_HOME}/bin/jmeter -n -t Board_Game_Inventory_Manager_Test_Plan.jmx -l Board_Game_Inventory_Manager_Test_Plan.report.jtl"
+                    sh "perfReport sourceDataFiles: 'Board_Game_Inventory_Manager_Test_Plan.report.jtl'"
+                }
+            }
+        }
 
         stage('Build and Analyze Frontend'){
             steps{
@@ -123,16 +133,6 @@ pipeline {
                         sh "aws elasticbeanstalk update-environment --environment-name Boardgame-inventory-env-4 --version-label ${VERSION}"
                     }  
                 }   
-            }
-        }
-
-        stage('Jmeter Test'){
-            steps{
-                script{
-                    sh "env"
-                    sh "jmeter -n -t Board_Game_Inventory_Manager_Test_Plan.jmx -l Board_Game_Inventory_Manager_Test_Plan.report.jtl"
-                    sh "perfReport sourceDataFiles: 'Board_Game_Inventory_Manager_Test_Plan.report.jtl'"
-                }
             }
         }
     }
