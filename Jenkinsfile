@@ -15,9 +15,9 @@ pipeline {
                 script{
                     sh "env"
                     //Run jmeter tests in non-GUI mode and generate a report
-                    sh "${JMETER_HOME}/bin/jmeter -n -t Board_Game_Inventory_Manager_Test_Plan.jmx -l Board_Game_Inventory_Manager_Test_Plan.report.jtl"
+                    sh "${JMETER_HOME}/bin/jmeter -n -t ${env.WORKSPACE}/Board_Game_Inventory_Manager_Test_Plan.jmx -l ${env.WORKSPACE}/Board_Game_Inventory_Manager_Test_Plan.report.jtl"
                     // Publish JMeter report using Performance Plugin
-                    perfReport sourceDataFiles: 'Board_Game_Inventory_Manager_Test_Plan.report.jtl'
+                    perfReport sourceDataFiles: '${env.WORKSPACE}/Board_Game_Inventory_Manager_Test_Plan.report.jtl'
                 }
             }
         }
