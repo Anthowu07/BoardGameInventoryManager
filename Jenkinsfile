@@ -129,6 +129,7 @@ pipeline {
         stage('Jmeter Test'){
             steps{
                 script{
+                    sh "env"
                     sh "jmeter -n -t Board_Game_Inventory_Manager_Test_Plan.jmx -l Board_Game_Inventory_Manager_Test_Plan.report.jtl"
                     sh "perfReport sourceDataFiles: 'Board_Game_Inventory_Manager_Test_Plan.report.jtl'"
                 }
