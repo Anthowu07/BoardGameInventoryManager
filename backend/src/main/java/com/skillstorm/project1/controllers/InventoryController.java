@@ -36,42 +36,42 @@ public class InventoryController {
     private WarehouseService warehouseService;
 
     // public InventoryController(InventoryService service) {
-    //     this.service = service;
+    // this.service = service;
     // }
 
     @GetMapping
-    public Iterable<Inventory> findAllInventories(){
+    public Iterable<Inventory> findAllInventories() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Inventory> findById(@PathVariable int id){
+    public ResponseEntity<Inventory> findById(@PathVariable int id) {
         Optional<Inventory> inventory = service.findById(id);
-        if(inventory.isPresent()){
+        if (inventory.isPresent()) {
             return ResponseEntity.ok(inventory.get());
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND)
-;        }
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    //POST Method to add a inventory entry
+    // POST Method to add a inventory entry
     @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ResponseEntity<?> Create(@RequestBody InventoryRequest inventoryRequest){
+    public ResponseEntity<?> Create(@RequestBody InventoryRequest inventoryRequest) {
         Optional<BoardGame> boardGameOptional = boardGameService.findById(inventoryRequest.getBoardgame_id());
         Optional<Warehouse> warehouseOptional = warehouseService.findById(inventoryRequest.getWarehouse_id());
 
-        //If given board game id or warehouse id is not present in their tables, return an error NOT_FOUND
+        // If given board game id or warehouse id is not present in their tables, return
+        // an error NOT_FOUND
         if (!boardGameOptional.isPresent()) {
             return new ResponseEntity<>("Board game with that ID is not found", HttpStatus.NOT_FOUND);
-        }else if (!warehouseOptional.isPresent()){
+        } else if (!warehouseOptional.isPresent()) {
             return new ResponseEntity<>("Warehouse with that ID is not found", HttpStatus.NOT_FOUND);
         }
-        
-        
+
         BoardGame boardgame = boardGameOptional.get();
         Warehouse warehouse = warehouseOptional.get();
-        //Update warehouse quantity field
+        // Update warehouse quantity field
         warehouse.setNum_items(warehouse.getNum_items() + boardgame.getReorder_quantity());
         Inventory inventory = new Inventory();
 
@@ -81,28 +81,30 @@ public class InventoryController {
         inventory.setWarehouse(warehouse);
         inventory.setMinimum_stock_level(inventoryRequest.getMinimum_stock_level());
         inventory.setMaximum_stock_level(inventoryRequest.getMaximum_stock_level());
-        
-        //Create inventory table entry
+
+        // Create inventory table entry
         inventory = service.save(inventory);
 
         return new ResponseEntity<>(inventory, HttpStatus.CREATED);
     }
 
-    //PUT Method to update/change inventory entry
-    //The method checks if the value exists in the table before attempting the method
+    // PUT Method to update/change inventory entry
+    // The method checks if the value exists in the table before attempting the
+    // method
     @PutMapping("/{id}")
-    public ResponseEntity<Inventory> updateInventory(@PathVariable("id") int id, @RequestBody Inventory inventory){
+    public ResponseEntity<Inventory> updateInventory(@PathVariable("id") int id, @RequestBody Inventory inventory) {
         inventory.setInventory_id(id);
         Optional<Inventory> existingInventory = this.service.findById(inventory.getInventory_id());
         Inventory updatedInventory = inventory;
-        if(existingInventory.isPresent()){
+        if (existingInventory.isPresent()) {
             Inventory oldInventory = existingInventory.get();
             inventory.setBoardgame(oldInventory.getBoardgame());
             inventory.setWarehouse(oldInventory.getWarehouse());
-            //When adding more inventory, update the num_items property of that warehouse
-            inventory.getWarehouse().setNum_items(inventory.getWarehouse().getNum_items() + (updatedInventory.getQuantity_available() - oldInventory.getQuantity_available()));
-            
-            //Hard coded values for now
+            // When adding more inventory, update the num_items property of that warehouse
+            inventory.getWarehouse().setNum_items(inventory.getWarehouse().getNum_items()
+                    + (updatedInventory.getQuantity_available() - oldInventory.getQuantity_available()));
+
+            // Hard coded values for now
             inventory.setReorder_point(5);
             inventory.setMaximum_stock_level(100);
             inventory.setMinimum_stock_level(0);
@@ -112,14 +114,17 @@ public class InventoryController {
         return ResponseEntity.notFound().build();
     }
 
-    //DELETE method to erase data from table
+    // DELETE method to erase data from table
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable int id) {
         Optional<Inventory> existingInventory = service.findById(id);
-        Inventory inventory = existingInventory.get();
-        inventory.getWarehouse().setNum_items(inventory.getWarehouse().getNum_items() - inventory.getQuantity_available());
-        service.deleteById(id);
+        if (existingInventory.isPresent()) {
+            Inventory inventory = existingInventory.get();
+            inventory.getWarehouse()
+                    .setNum_items(inventory.getWarehouse().getNum_items() - inventory.getQuantity_available());
+            service.deleteById(id);
+        }
     }
 
 }

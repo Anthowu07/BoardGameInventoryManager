@@ -10,20 +10,6 @@ pipeline {
     
     stages{
 
-        stage('Jmeter Test'){
-            steps{
-                script{
-                    sh "env"
-                    //Run jmeter tests in non-GUI mode and generate a report
-                    sh '''
-                    ${JMETER_HOME}/bin/jmeter -n -t /var/lib/jenkins/jobs/"Board Game Inventory Manager Pipeline"/workspace/Board_Game_Inventory_Manager_Test_Plan.jmx -l /var/lib/jenkins/Board_Game_Inventory_Manager_Test_Plan.report.jtl
-                    '''
-                    // Publish JMeter report using Performance Plugin
-                    perfReport sourceDataFiles: '/var/lib/jenkins/Board_Game_Inventory_Manager_Test_Plan.report.jtl'
-                }
-            }
-        }
-
         stage('Build and Analyze Frontend'){
             steps{
                 dir('boardgameinventory-react'){
@@ -50,18 +36,6 @@ pipeline {
             steps{
                 dir('tests'){
                     sh "mvn test"
-
-                    // SonarQube Analysis for /tests
-                    // withSonarQubeEnv('SonarCloud') {
-                    //     sh '''
-                    //         npx sonar-scanner \
-                    //         -Dsonar.projectKey=anthowu07_boardgame-manager-frontend \
-                    //         -Dsonar.projectName=boardgame-manager-frontend \
-                    //         -Dsonar.sources=src \
-                    //         -Dsonar.java.binaries=target/test-classes \
-                    //         -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-                    //     '''
-                    // }
                 }
 
                 dir('boardgameinventory-react'){
@@ -72,18 +46,6 @@ pipeline {
 
         stage('Deploy Frontend'){
             steps{
-                // script{
-                //     try{
-                //         withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
-                //             sh "aws s3 sync boardgameinventory-react/dist s3://boardgame-inventory-management"
-                //             //sh "aws elasticbeanstalk create-application-version --application-name myName --version-label your-version-label 0.0.1 --source-bundle S3Bucket="boardgame-inventory-management",S3Key="*.jar""
-                //             //sh "aws elasticbeanstalk update-environment --environment-name myName --version-label your-version-label"
-                //         }
-                //     }catch(Exception e){
-                //         echo "${e}"
-                //         throw e
-                //     }
-                // }
                 script{
                       withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
                         sh "aws s3 sync boardgameinventory-react/dist s3://boardgame-inventory-management"
@@ -137,6 +99,20 @@ pipeline {
                         sh "aws elasticbeanstalk update-environment --environment-name Boardgame-inventory-env-4 --version-label ${VERSION}"
                     }  
                 }   
+            }
+        }
+
+        stage('Jmeter Test'){
+            steps{
+                script{
+                    sh "env"
+                    //Run jmeter tests in non-GUI mode and generate a report
+                    sh '''
+                    ${JMETER_HOME}/bin/jmeter -n -t /var/lib/jenkins/jobs/"Board Game Inventory Manager Pipeline"/workspace/Board_Game_Inventory_Manager_Test_Plan.jmx -l /var/lib/jenkins/Board_Game_Inventory_Manager_Test_Plan.report.jtl
+                    '''
+                    // Publish JMeter report using Performance Plugin
+                    perfReport sourceDataFiles: '/var/lib/jenkins/Board_Game_Inventory_Manager_Test_Plan.report.jtl'
+                }
             }
         }
     }
