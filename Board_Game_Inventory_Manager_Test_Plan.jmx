@@ -356,6 +356,67 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Inventory Post Request">
+          <stringProp name="HTTPSampler.domain">Boardgame-inventory-env-4.eba-9ddwy6jr.us-east-1.elasticbeanstalk.com</stringProp>
+          <stringProp name="HTTPSampler.port">8080</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/api/boardgames</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;boardgame&quot;: {&#xd;
+      &quot;boardgame_id&quot;: 27,&#xd;
+      &quot;name&quot;: &quot;Monopoly&quot;,&#xd;
+      &quot;publisher&quot;: &quot;Hasbro&quot;,&#xd;
+      &quot;reorder_quantity&quot;: 10&#xd;
+    },&#xd;
+    &quot;warehouse&quot;: {&#xd;
+      &quot;warehouse_id&quot;: 1,&#xd;
+      &quot;name&quot;: &quot;Warehouse&quot;,&#xd;
+      &quot;capacity&quot;: 1230,&#xd;
+      &quot;num_items&quot;: 60&#xd;
+    },&#xd;
+    &quot;quantity_available&quot;: 10,&#xd;
+    &quot;reorder_point&quot;: 5,&#xd;
+    &quot;maximum_stock_level&quot;: 0,&#xd;
+    &quot;minimum_stock_level&quot;: 0&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Warehouse Post Request">
+          <stringProp name="HTTPSampler.domain">Boardgame-inventory-env-4.eba-9ddwy6jr.us-east-1.elasticbeanstalk.com</stringProp>
+          <stringProp name="HTTPSampler.port">8080</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/api/boardgames</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;name&quot;: &quot;JMeter Test Warehouse&quot;,&#xd;
+    &quot;capacity&quot;: &quot;1250&quot;,&#xd;
+    &quot;num_items&quot;: 0&#xd;
+  }</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Board Games Post Request">
           <stringProp name="HTTPSampler.domain">Boardgame-inventory-env-4.eba-9ddwy6jr.us-east-1.elasticbeanstalk.com</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
